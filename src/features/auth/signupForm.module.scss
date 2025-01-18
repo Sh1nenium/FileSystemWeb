@@ -1,0 +1,21 @@
+.signup-form {
+  display: flex;
+  flex-direction: column;
+ 
+  .password {
+    margin-top: 1rem;
+  }
+
+  .email {
+    margin-top: 1rem;
+  }
+
+  .login-link {
+    margin-top: .5rem;
+    text-align: end;
+  }
+
+  .submit {
+    margin-top: 1rem;
+  }
+}

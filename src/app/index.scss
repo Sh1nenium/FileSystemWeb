@@ -1,0 +1,27 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Inter', sans-serif;
+}
+
+input {
+  border: 1px solid #D9D9D9;
+  border-radius: 10px;
+  padding: 0.5rem .75rem;
+}
+
+a {
+  color: inherit;
+  color: gray;
+}
+
+button {
+  padding: 0;
+  cursor: pointer;
+  border: none;
+  background-color: transparent;
+}

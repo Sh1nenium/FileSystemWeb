@@ -1,0 +1,14 @@
+.explorer-page {
+  height: 100%;
+  display: flex;
+  gap: 1.5rem;
+  
+
+  .file-explorer-side-bar {
+    width: 15rem;
+  }
+
+  .file-explorer {
+    flex-grow: 1;
+  }
+}

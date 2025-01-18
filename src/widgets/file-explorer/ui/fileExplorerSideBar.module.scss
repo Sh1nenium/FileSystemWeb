@@ -1,0 +1,12 @@
+.file-explorer-side-bar {
+  display: flex;
+  gap: 1rem;
+  flex-direction: column;
+
+  .title {
+    height: 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+}
