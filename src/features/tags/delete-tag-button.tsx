@@ -1,11 +1,11 @@
-import { Tag } from 'lucide-react'; 
-import styles from './tagAddButton.module.scss';
+import { Trash } from 'lucide-react';
+import styles from './deleteTagButton.module.scss';
 import { useModal } from '@/shared/utils/modal';
 
-export function TagAddButton({
+export function DeleteTagButton({
   id,
   renderModal
-}: {
+} : {
   id: string;
   renderModal?: (id: string, isOpen: boolean, onClose: () => void) => React.ReactNode
 }) {
@@ -18,9 +18,12 @@ export function TagAddButton({
   }
 
   return (
-    <button className={styles['add-tag-button']} onClick={handle}>
-      <Tag size={16} />
+    <button
+      className={styles['delete-button']}
+      onClick={handle}
+    >
+      <Trash size={16} />
       {renderModal?.(id, isOpen.value, onClose)}
     </button>
-  );
+  )
 }

@@ -7,7 +7,7 @@ export type FileSystemObject = {
     sizeInBytes: number,
     createdAt: string,
     isFavorite: boolean,
-    Tags: Tag[]
+    tags: Tag[]
 }
 
 export type FileModel = {

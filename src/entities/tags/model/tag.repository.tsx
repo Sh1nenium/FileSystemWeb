@@ -1,11 +1,8 @@
 import { IS_SUCCESS_STATUS } from "@/shared/api/api-instance";
 import { useMutation, useQuery, useQueryClient } from "react-query";
-
 import { toast } from "react-toastify";
 import { Tag } from "./types";
-
 import { GetAllTagsApi } from "@/shared/api/tags/get-all-tags";
-import { GetTagByIdApi } from "@/shared/api/tags/get-tag-by-id";
 import { CreateTagApi } from "@/shared/api/tags/create-tag";
 import { DeleteTagApi } from "@/shared/api/tags/delete-tag";
 import { UpdateTagApi } from "@/shared/api/tags/update-tag";

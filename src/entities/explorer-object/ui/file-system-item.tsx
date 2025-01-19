@@ -1,4 +1,4 @@
-import { File, Folder, Star } from 'lucide-react'; // Иконки для файла, папки, избранного и удаления
+import { File, Folder } from 'lucide-react'; // Иконки для файла, папки, избранного и удаления
 import styles from './fileSystemItem.module.scss';
 import { FileModel, FileSystemObject, FolderModel } from '@/entities/explorer-object';
 import { TagList } from './tag-list';
@@ -11,6 +11,8 @@ export function FileSystemItem({
   onAddTag,
   onToggleFavorite,
   onDelete,
+  renderEdit,
+  renderDownload
 }: {
   item: FileSystemObject;
   onClick?: (item: FileSystemObject) => void;
@@ -18,6 +20,8 @@ export function FileSystemItem({
   onAddTag?: () => React.ReactNode;
   onToggleFavorite?: (itemId: string, isFavorite: boolean) => React.ReactNode;
   onDelete?: (itemId: string) => React.ReactNode;
+  renderEdit?: (itemId: string, name: string, description: string, type: "File" | "Folder") => React.ReactNode;
+  renderDownload?: (itemId: string) => React.ReactNode;
 }) {
   const isFolder = item.type === 'Folder';
 
@@ -30,7 +34,6 @@ export function FileSystemItem({
         <div className={styles['header']}>
           <span className={styles['name']}>
             {item.name}
-            {item.isFavorite && <Star size={16} className={styles['favorite-icon']} />}
           </span>
           {!isFolder && (
             <span className={styles['description']}>
@@ -49,9 +52,12 @@ export function FileSystemItem({
           </span>
           <span className={styles['created']}>{formatDate(item.createdAt ?? '')}</span>
         </div>
-        <TagList tags={item.Tags} onRemoveTag={onRemoveTag} onAddTag={onAddTag} />
+        <TagList tags={item.tags} onRemoveTag={onRemoveTag} onAddTag={onAddTag} />
       </div>
       <div className={styles['actions']}>
+        {onAddTag?.()}
+        {renderDownload?.(item.id)}
+        {renderEdit?.(item.id, item.name, (item as FileModel).description, item.type)}
         {onToggleFavorite?.(item.id, item.isFavorite)}
         {onDelete?.(item.id)}
       </div>

@@ -1,11 +1,11 @@
-import { Tag } from 'lucide-react'; 
-import styles from './tagAddButton.module.scss';
+import { Pencil } from 'lucide-react';
+import styles from './editTagButton.module.scss';
 import { useModal } from '@/shared/utils/modal';
 
-export function TagAddButton({
+export function EditTagButton({
   id,
   renderModal
-}: {
+} : {
   id: string;
   renderModal?: (id: string, isOpen: boolean, onClose: () => void) => React.ReactNode
 }) {
@@ -18,9 +18,12 @@ export function TagAddButton({
   }
 
   return (
-    <button className={styles['add-tag-button']} onClick={handle}>
-      <Tag size={16} />
+    <button
+      className={styles['edit-button']}
+      onClick={handle}
+    >
+      <Pencil size={16} />
       {renderModal?.(id, isOpen.value, onClose)}
     </button>
-  );
+  )
 }

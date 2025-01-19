@@ -5,6 +5,7 @@ import { toast } from "react-toastify";
 import { IS_SUCCESS_STATUS } from "@/shared/api/api-instance";
 import { createFolderApi } from "@/shared/api/file-system/create-folder";
 import { DeleteObjectApi } from "@/shared/api/file-system/delete-object";
+import { editObjectApi } from "@/shared/api/file-system/edit-object";
 
 export function useFileSystemRepository(id?: string) {
   const queryClient = useQueryClient();
@@ -35,6 +36,21 @@ export function useFileSystemRepository(id?: string) {
         }
   });
 
+  const editObjectMutation = useMutation({
+    mutationFn: (data: { id: string, name: string, description: string, parentFolderId: string, type: "File" | "Folder" }) => 
+        editObjectApi(data.id, data),
+        onSuccess: () => {
+            toast.success("Объект был успешно обновлен!");
+            queryClient.invalidateQueries(['files']);
+        }
+  });
+
+  const editObject = async (data: { id: string, name: string, description: string, parentFolderId: string, type: "File" | "Folder" }) => {
+    const result = await editObjectMutation.mutateAsync(data);
+
+    return IS_SUCCESS_STATUS(result.status);
+  }
+
   const deleteObject = async (guid: string) => {
     const result = await deleteObjectMutation.mutateAsync(guid);
 
@@ -59,5 +75,6 @@ export function useFileSystemRepository(id?: string) {
     createFile,
     createFolder,
     deleteObject,
+    editObject
   }
 }

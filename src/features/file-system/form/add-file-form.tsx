@@ -26,7 +26,6 @@ export function AddFileForm({
   const { createFile } = useFileSystemRepository();
 
   const handle = async (data: InputForm) => {
-    console.log(data.form as File['name']);
     const success = await createFile({
       form: new File([data.form], _.split(data.form as File['name'], '/').pop() as string),
       parentFolderId: parentFolderId || '',
