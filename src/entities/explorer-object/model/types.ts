@@ -1,3 +1,5 @@
+import { Tag } from "@/entities/tags"
+
 export type FileSystemObject = {
     id: string,
     type: "File" | "Folder",
@@ -5,6 +7,7 @@ export type FileSystemObject = {
     sizeInBytes: number,
     createdAt: string,
     isFavorite: boolean,
+    Tags: Tag[]
 }
 
 export type FileModel = {
@@ -13,4 +16,5 @@ export type FileModel = {
 
 export type FolderModel = {
     content: FileSystemObject[]
+    objectCount: number
 } & FileSystemObject

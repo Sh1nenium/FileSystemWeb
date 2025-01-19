@@ -46,11 +46,16 @@ export function EditEmailForm({
       <UiInput 
         name="email"
         control={control}
-        label="Почта"
+        placeholder="Новая почта..."
+        className={styles['input']} 
       />
       <div className={styles['buttons']}>
-        <UiButton type="submit">Сохранить</UiButton>
-        <UiButton onClick={onClose}>Отменить</UiButton>
+      <UiButton type="submit" className={styles['save-button']}>
+          Сохранить
+        </UiButton>
+        <UiButton onClick={onClose} className={styles['cancel-button']}>
+          Отменить
+        </UiButton>
       </div>
     </form>
   )

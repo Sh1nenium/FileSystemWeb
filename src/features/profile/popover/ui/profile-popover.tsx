@@ -9,6 +9,7 @@ import { useSessionRepository } from "@/entities/session";
 import { logoutApi } from "@/shared/api/auth/logout";
 import { IS_SUCCESS_STATUS } from "@/shared/api/api-instance";
 import { EditEmailButton, EditInitialsButton } from "../../edit";
+import { ChevronDown } from 'lucide-react'; // Импортируем иконку стрелки
 
 export function ProfilePopover({
   className,
@@ -26,33 +27,46 @@ export function ProfilePopover({
       removeSession();
       return;
     }
-
   }
 
+
+  
   return (
     <Popover className={clsx(className, styles['profile-popover'])}>
       <PopoverButton className={styles['popover-button']}>
-        {user?.picture ? 
-          <img className={styles['image']} src={`data:image/png;base64,${user.picture}`} alt="profile" /> :
-          <ProfileIcon className={styles['image']} size={32}/>}
+        <div className={styles['profile-container']}>
+          {user?.picture ? (
+            <img
+              className={styles['image']}
+              src={`data:image/png;base64,${user.picture}`}
+              alt="profile"
+            />
+          ) : (
+            <ProfileIcon className={styles['image']} size={32} />
+          )}
+          <ChevronDown className={styles['arrow']} size={16} /> {/* Иконка стрелки */}
+        </div>
       </PopoverButton>
       <PopoverPanel
         transition
         anchor="top end"
-        className={styles['popover-panel']} 
+        className={styles['popover-panel']}
       >
-        <ProfilePicture picture={user?.picture} />
-        <UiDivider orientation="horizontal"/> 
-        <ProfileInfo 
+        <div className={styles['profile-header']}>
+          <ProfilePicture picture={user?.picture} />
+          <h1 className={styles['username']}>{getSession()?.username}</h1>
+        </div>
+        <UiDivider orientation="horizontal" />
+        <ProfileInfo
           user={user}
-          login={getSession()?.username} 
+          login={getSession()?.username}
           renderEditEmail={() => <EditEmailButton />}
           renderEditInitials={() => <EditInitialsButton />}
         />
-        <UiButton onClick={handleLogout}>
+        <UiButton onClick={handleLogout} className={styles['logout-button']}>
           Выход
         </UiButton>
       </PopoverPanel>
     </Popover>
-  )
+  );
 }

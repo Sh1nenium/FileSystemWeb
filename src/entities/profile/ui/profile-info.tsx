@@ -13,7 +13,6 @@ type Field = {
 export function ProfileInfo({
   className,
   user,
-  login,
   renderEditInitials,
   renderEditEmail
 } : {
@@ -24,7 +23,6 @@ export function ProfileInfo({
   renderEditEmail?: () => React.ReactNode
 }) {
   const fields: Field[] = [
-    { label: 'Логин', value: login },
     { label: 'Имя и Фамилия', value: `${user?.name ?? ''} ${user?.surname ?? 'Не заполнено'}`, feature: renderEditInitials?.() },
     { label: 'Email', value: user?.email, feature: renderEditEmail?.() },
   ]

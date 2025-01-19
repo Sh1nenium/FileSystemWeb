@@ -6,6 +6,26 @@
   .header {
     display: flex;
     align-items: center;
+    justify-content: space-between; // Выравниваем элементы по краям
     height: 2rem;
+    padding: 0 1rem; // Добавляем отступы по бокам
+  }
+
+  .title-container {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem; // Отступ между иконкой и текстом
+    flex: 1; // Занимает всё доступное пространство
+    justify-content: center; // Выравниваем по центру
+  }
+
+  .icon {
+    color: #333; // Цвет иконки
+  }
+
+  .title {
+    font-size: 1.25rem;
+    font-weight: bold;
+    color: #333;
   }
 }

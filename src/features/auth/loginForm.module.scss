@@ -9,62 +9,94 @@
 .loginBox {
   background-color: #ffffff;
   padding: 2rem;
-  border-radius: 10px; // Скруглённые углы
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); // Тень
+  border-radius: 15px; // Увеличили скругление углов
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2); // Увеличили тень
   width: 100%;
   max-width: 400px; // Ширина прямоугольника
+  border: 1px solid #e0e0e0; // Добавили границу
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+
+  &:hover {
+    transform: translateY(-5px); // Поднимаем контейнер при наведении
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.3); // Увеличиваем тень при наведении
+  }
 }
 
 .login-form {
   display: flex;
   flex-direction: column;
 
+  .title {
+    height: 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.25rem;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 1rem;
+  }
+
+  input {
+    width: 100%;
+    padding: 0.75rem;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    font-size: 1rem;
+    color: #333;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+
+    &:focus {
+      border-color: #007bff;
+      box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.25);
+      outline: none;
+    }
+
+    &::placeholder {
+      color: #6c757d;
+      opacity: 1;
+    }
+
+    &:focus::placeholder {
+      color: transparent;
+    }
+  }
+
   .password {
-    margin-top: 1rem;
+    margin-top: 1.5rem; // Увеличили отступ
   }
 
   .register-link {
-    margin-top: 0.5rem;
+    margin-top: 1rem; // Увеличили отступ
     text-align: end;
-    color: #007bff; // Цвет ссылки
+    color: #007bff;
     text-decoration: none;
+    font-weight: 500; // Полужирный шрифт
 
     &:hover {
       text-decoration: underline;
     }
   }
 
-  .title {
-    margin-bottom: 1.5rem;
-    color: #333;
-    font-size: 1.5rem;
-  }
-  
-
   .submit {
-    margin-top: 1rem;
-    background-color: #28a745; // Зелёный цвет кнопки
-    color: #ffffff; // Белый текст
+    margin-top: 1.5rem; // Увеличили отступ
+    background: linear-gradient(135deg, #007bff, #0056b3); // Градиентный фон
+    color: #ffffff;
     border: none;
     padding: 0.75rem;
-    border-radius: 5px;
+    border-radius: 8px;
     cursor: pointer;
     font-size: 1rem;
-    transition: background-color 0.3s ease;
+    font-weight: bold; // Жирный шрифт
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
 
     &:hover {
-      background-color: #218838; // Тёмно-зелёный при наведении
+      transform: translateY(-2px); // Поднимаем кнопку при наведении
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); // Тень при наведении
     }
 
-       
-  input::placeholder {
-    color: #6c757d; 
-    opacity: 1; 
-  }
-
-  input:focus::placeholder {
-    color: transparent; 
-  }
-
+    &:active {
+      transform: translateY(0); // Возвращаем кнопку в исходное положение
+    }
   }
 }

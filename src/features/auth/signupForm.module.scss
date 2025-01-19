@@ -1,45 +1,79 @@
 .signup-form {
   display: flex;
   flex-direction: column;
- 
-  .password {
-    margin-top: 1rem;
+
+  .title {
+    margin-bottom: 2rem; // Увеличили отступ
+    color: #333;
+    font-size: 2rem; // Увеличили размер шрифта
+    font-weight: bold; // Жирный шрифт
+    text-align: center;
+  }
+
+  input {
+    width: 100%;
+    padding: 0.75rem;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    font-size: 1rem;
+    color: #333;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+
+    &:focus {
+      border-color: #007bff;
+      box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.25);
+      outline: none;
+    }
+
+    &::placeholder {
+      color: #6c757d;
+      opacity: 1;
+    }
+
+    &:focus::placeholder {
+      color: transparent;
+    }
   }
 
   .email {
-    margin-top: 1rem;
+    margin-top: 1.5rem; // Увеличили отступ
+  }
+
+  .password {
+    margin-top: 1.5rem; // Увеличили отступ
   }
 
   .login-link {
-    margin-top: .5rem;
+    margin-top: 1rem; // Увеличили отступ
     text-align: end;
     color: #007bff;
+    text-decoration: none;
+    font-weight: 500; // Полужирный шрифт
+
+    &:hover {
+      text-decoration: underline;
+    }
   }
 
   .submit {
-    margin-top: 1rem;
-    background-color: #28a745; // Зелёный цвет кнопки
-    color: #ffffff; // Белый текст
+    margin-top: 1.5rem; // Увеличили отступ
+    background: linear-gradient(135deg, #28a745, #218838); // Градиентный фон
+    color: #ffffff;
     border: none;
     padding: 0.75rem;
-    border-radius: 5px;
+    border-radius: 8px;
     cursor: pointer;
     font-size: 1rem;
-    transition: background-color 0.3s ease;
+    font-weight: bold; // Жирный шрифт
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
 
     &:hover {
-      background-color: #218838; // Тёмно-зелёный при наведении
+      transform: translateY(-2px); // Поднимаем кнопку при наведении
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); // Тень при наведении
     }
 
-       
-  input::placeholder {
-    color: #6c757d; 
-    opacity: 1; 
+    &:active {
+      transform: translateY(0); // Возвращаем кнопку в исходное положение
+    }
   }
-
-  input:focus::placeholder {
-    color: transparent; 
-  }
-  
-}
 }
