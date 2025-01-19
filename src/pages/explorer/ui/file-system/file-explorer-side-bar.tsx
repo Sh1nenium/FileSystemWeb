@@ -4,13 +4,14 @@ import { UiDivider } from "@/shared/ui/ui-divider"
 import { useFavoritesRepository } from "@/entities/explorer-object/model/favorite.repository"
 import { File, Folder, Star, X } from 'lucide-react';
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 export function FileExplorerSideBar({
   className,
 } : {
   className?: string
 }) {
-
+  const navigate = useNavigate();
   const { favorites, deleteFromFavorite } = useFavoritesRepository();
 
   const [filter, setFilter] = useState<"File" | "Folder" | "All">("All");
@@ -23,7 +24,7 @@ export function FileExplorerSideBar({
       return item.type === filter; 
   });
 
-  const sortedFavorites = filteredFavorites?.sort((a, b) => {
+  filteredFavorites?.sort((a, b) => {
     if (sortOrder === "asc") {
       return a.name.localeCompare(b.name); 
     } else {
@@ -34,6 +35,10 @@ export function FileExplorerSideBar({
   const handleRemoveFavorite = (id: string) => {
     deleteFromFavorite(id);
   };
+
+  const hadnleClick = (id: string) => {
+    navigate('?id=' + id);
+  }
 
   return (
     <aside className={clsx(className, styles['file-explorer-side-bar'])}>
@@ -87,7 +92,7 @@ export function FileExplorerSideBar({
       ) : (
         <div className={styles['favorites-list']}>
           {filteredFavorites?.map((item) => (
-            <div key={item.id} className={styles['favorite-item']}>
+            <div key={item.id} className={styles['favorite-item']} onClick={() => hadnleClick(item.id)}>
               <span className={styles['type']}>
                 {item.type === 'File' ? <File size={16} /> : <Folder size={16} />}
               </span>

@@ -1,7 +1,8 @@
-import { File, Folder, Star, Trash } from 'lucide-react'; // Иконки для файла, папки, избранного и удаления
+import { File, Folder, Star } from 'lucide-react'; // Иконки для файла, папки, избранного и удаления
 import styles from './fileSystemItem.module.scss';
 import { FileModel, FileSystemObject, FolderModel } from '@/entities/explorer-object';
-import { TagList } from '../tags/tag-list';
+import { TagList } from './tag-list';
+import React from 'react';
 
 export function FileSystemItem({
   item,
@@ -12,16 +13,16 @@ export function FileSystemItem({
   onDelete,
 }: {
   item: FileSystemObject;
-  onClick?: () => void;
+  onClick?: (item: FileSystemObject) => void;
   onRemoveTag?: (tagId: string) => void;
-  onAddTag?: () => void;
-  onToggleFavorite?: (itemId: string) => void; // Функция для добавления/удаления из избранного
-  onDelete?: (itemId: string) => void; // Функция для удаления элемента
+  onAddTag?: () => React.ReactNode;
+  onToggleFavorite?: (itemId: string, isFavorite: boolean) => React.ReactNode;
+  onDelete?: (itemId: string) => React.ReactNode;
 }) {
   const isFolder = item.type === 'Folder';
 
   return (
-    <div className={styles['item']} onClick={onClick}>
+    <div className={styles['item']} onClick={() => onClick?.(item)}>
       <div className={styles['icon']}>
         {isFolder ? <Folder size={20} /> : <File size={20} />}
       </div>
@@ -44,31 +45,15 @@ export function FileSystemItem({
             </span>
           )}
           <span className={styles['size']}>
-            {!isFolder && formatSize(item.sizeInBytes)}
+            {formatSize(item.sizeInBytes ?? 0)}
           </span>
-          <span className={styles['created']}>{formatDate(item.createdAt)}</span>
+          <span className={styles['created']}>{formatDate(item.createdAt ?? '')}</span>
         </div>
         <TagList tags={item.Tags} onRemoveTag={onRemoveTag} onAddTag={onAddTag} />
       </div>
       <div className={styles['actions']}>
-        <button
-          className={styles['favorite-button']}
-          onClick={(e) => {
-            e.stopPropagation(); 
-            onToggleFavorite?.(item.id);
-          }}
-        >
-          <Star size={16} fill={item.isFavorite ? '#ffd700' : 'none'} />
-        </button>
-        <button
-          className={styles['delete-button']}
-          onClick={(e) => {
-            e.stopPropagation(); 
-            onDelete?.(item.id);
-          }}
-        >
-          <Trash size={16} /> {}
-        </button>
+        {onToggleFavorite?.(item.id, item.isFavorite)}
+        {onDelete?.(item.id)}
       </div>
     </div>
   );

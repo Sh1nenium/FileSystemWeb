@@ -17,6 +17,7 @@ export function useFavoritesRepository() {
           queryClient.invalidateQueries(['favorited']);
         }
   });
+  
   const deleteFromFavoriteMutation = useMutation({
      mutationFn: (data: string) => DeleteFromFavoriteApi(data),
         onSuccess: () => {

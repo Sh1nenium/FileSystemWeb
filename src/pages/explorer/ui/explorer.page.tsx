@@ -1,4 +1,4 @@
-import { FileExplorer, FileExplorerSideBar } from "@/widgets/file-explorer";
+import { FileExplorer, FileExplorerSideBar } from "./file-system";
 import styles from './explorer.page.module.scss';
 import { UiDivider } from "@/shared/ui/ui-divider";
 

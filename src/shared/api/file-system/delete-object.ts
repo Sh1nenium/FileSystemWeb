@@ -1,5 +1,5 @@
 import { apiInstance } from "../api-instance";
 import { BACKEND_URL } from "@/shared/constants/backend-url";
 
-export const DeleteObjectContent = (guid: string) => 
+export const DeleteObjectApi = (guid: string) => 
     apiInstance().delete(`${BACKEND_URL.FILE_SYSTEM}/${guid}`);

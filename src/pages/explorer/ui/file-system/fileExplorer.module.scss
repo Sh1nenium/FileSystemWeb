@@ -28,4 +28,9 @@
     font-weight: bold;
     color: #333;
   }
+
+  .buttons-container {
+    display: flex;
+    gap: 0.5rem;
+  }
 }
