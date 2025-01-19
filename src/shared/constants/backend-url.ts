@@ -9,4 +9,6 @@ export const BACKEND_URL = {
   USER_EMAIL: "/user/email",
   USER_PASSWORD: "/user/password",
   USER_PICTURE: "/user/picture",
+
+  FILE_SYSTEM_FAVORITES: "/file-system/favorites"
 }

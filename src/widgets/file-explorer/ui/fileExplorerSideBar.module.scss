@@ -1,12 +1,154 @@
 .file-explorer-side-bar {
-  display: flex;
-  gap: 1rem;
-  flex-direction: column;
+  // display: flex;
+  // gap: 1rem;
+  // flex-direction: column;
+
+  // width: 100%;
+  // padding: 1rem;
+  // background-color: #ffffff;
+  // border-right: 1px solid #e0e0e0;
 
   .title {
     height: 2rem;
     display: flex;
     align-items: center;
     justify-content: center;
+    font-size: 1.25rem;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 1rem;
+  }
+
+  .star-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 24px;
+    height: 24px;
+    padding: auto; 
+    color: #ffd700; 
+    flex-shrink: 0;
+    margin-right: 0.5rem; 
+    padding: 0.25rem; 
+  }
+
+  .filter-buttons {
+    display: flex;
+    gap: 0.5rem;
+    margin-bottom: 1rem;
+    margin-top: 1rem;
+    padding: 0.5rem;
+  
+    button {
+      padding: 0.5rem 1rem;
+      border: 1px solid #e0e0e0;
+      border-radius: 4px;
+      background-color: #f9f9f9;
+      cursor: pointer;
+      transition: background-color 0.3s ease, border-color 0.3s ease;
+  
+      &:hover {
+        background-color: #f0f0f0;
+        border-color: #007bff;
+      }
+  
+      &.active {
+        background-color: #007bffbc;
+        color: #ffffff;
+        border-color: #007bff;
+      }
+    }
+  }
+  .sotr-buttons {
+    display: flex;
+    gap: 0.5rem;
+    margin-bottom: 1rem;
+    margin-top: 1rem;
+    padding: 0.5rem;
+  
+    button {
+      padding: 0.5rem 1rem;
+      border: 1px solid #e0e0e0;
+      border-radius: 4px;
+      background-color: #f9f9f9;
+      cursor: pointer;
+      transition: background-color 0.3s ease, border-color 0.3s ease;
+  
+      &:hover {
+        background-color: #f0f0f0;
+        border-color: #007bff;
+      }
+  
+      &.active {
+        background-color: #007bffbc;
+        color: #ffffff;
+        border-color: #007bff;
+      }
+    }
+  }
+  
+  
+  .favorites-list {
+    
+    margin-top: 1rem;
+    display: flex;
+    flex-direction: column; 
+    gap: 0.5rem;
+
+    .favorite-item {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      padding: 0.75rem;
+      border: 1px solid #e0e0e0;
+      border-radius: 8px;
+      background-color: #f9f9f9;
+      transition: border-color 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
+      
+      .remove-button {
+        background: none;
+        border: none;
+        cursor: pointer;
+        padding: 0.25rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: #666;
+        transition: color 0.3s ease;
+    
+        &:hover {
+          color: #ff0000; // Красный цвет при наведении
+        }
+      }
+
+      &:hover {
+        border-color: #007bff; // Новый цвет границы
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2); // Тень
+        cursor: pointer;
+      }
+    
+      .name {
+        font-size: 1rem;
+        font-weight: bold;
+        color: #333;
+        flex: 1;
+      }
+
+      .type {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width:  px; // Фиксированная ширина для иконки
+        height: 24px; // Фиксированная высота для иконки
+        color: #666; // Цвет иконки
+      }
+
+    }
+  }
+
+  .empty-message {
+    font-size: 0.875rem;
+    color: #666;
+    margin-top: 1rem;
   }
 }

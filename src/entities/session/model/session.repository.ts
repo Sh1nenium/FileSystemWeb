@@ -1,3 +1,4 @@
+import { toast } from "react-toastify";
 import { Session } from "./types";
 import { useAuth } from "@/shared/utils/auth";
 
@@ -5,6 +6,7 @@ export function useSessionRepository() {
   const { setIsAuthenticated } = useAuth();
     
   const saveSession = (value: Session) => {
+    toast.success("Вы успешно авторизовались!")
     localStorage.setItem('session', JSON.stringify(value));
     setIsAuthenticated(true);
   }
@@ -14,6 +16,7 @@ export function useSessionRepository() {
   
   const removeSession = () => {
     localStorage.removeItem('session')
+    toast.success("Вы успешно вышли!")
     setIsAuthenticated(false)
   };
 

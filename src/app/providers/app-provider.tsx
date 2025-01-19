@@ -5,6 +5,8 @@ import { AuthProvider } from "./app-auth";
 
 export function AppProvider({ children }: { children: React.ReactNode }) {
   return (
+
+    
     <ComposeChildren>
       <QueryProvider/>
       <AuthProvider/>

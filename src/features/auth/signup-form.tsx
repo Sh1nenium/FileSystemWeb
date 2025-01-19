@@ -7,6 +7,7 @@ import clsx from "clsx"
 import { ROUTES } from "@/shared/constants/routes"
 import { UiButton } from "@/shared/ui"
 import { signupApi } from "@/shared/api/auth/signup"
+import { User, Lock, Mail } from 'lucide-react';
 
 type InputForm = {
   login: string,
@@ -36,27 +37,28 @@ export function SignupForm({ className }: { className?: string }) {
 
   return (
     <form onSubmit={handleSubmit(handle)} className={clsx(className, styles['signup-form'])}>
+        <h1 className={styles.title}>Регистрация</h1>
       <UiInput 
         control={control}
         name="login"
-        label="Логин"
+        icon={<User size={16} />} 
       />
       <UiInput
         className={styles['password']}
         control={control}
         name="password"
-        label="Пароль"
         type="password"
+        icon={<Lock size={16} />}
       />
       <UiInput
         className={styles['email']}
         control={control}
         name="email"
-        label="Почта"
         type="email"
+        icon={<Mail size={16} />}
       />
       <span className={styles['login-link']}>
-        <Link to={ROUTES.LOGIN}>Войти</Link>
+        Уже есть аккаунт?<Link to={ROUTES.LOGIN}>Войти</Link>
       </span>
       <UiButton type='submit' className={styles['submit']}>
         Зарегистрироваться

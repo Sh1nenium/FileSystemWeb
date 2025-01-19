@@ -7,25 +7,30 @@ type UiInputProps<T extends FieldValues> = {
   label?: string;
   className?: string;
   placeholder?: string
+  icon?: React.ReactNode;
 } & React.InputHTMLAttributes<HTMLInputElement> & UseControllerProps<T> 
 
 export function UiInput<T extends FieldValues>({
-  label, 
+  label,
   className,
   placeholder,
+  icon,
   ...props
-} : UiInputProps<T>) {
+}: UiInputProps<T>) {
   const { field } = useController({ ...props });
 
   return (
     <Field className={clsx(className, styles['ui-input'])}>
-      <Label>{label}</Label>
-      <Input 
-        {...field}
-        placeholder={placeholder}
-        autoComplete="off"
-        type={props.type ?? 'text'}
-      />
+      {label && <Label>{label}</Label>}
+      <div className={styles.inputContainer}>
+        {icon && <span className={styles.icon}>{icon}</span>}
+        <Input
+          {...field}
+          placeholder={placeholder}
+          autoComplete="off"
+          type={props.type ?? 'text'}
+        />
+      </div>
     </Field>
-  )
+  );
 }

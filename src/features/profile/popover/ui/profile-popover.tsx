@@ -17,7 +17,7 @@ export function ProfilePopover({
   className?: string;
   user?: User;
 }) {
-  const { removeSession } = useSessionRepository();
+  const { removeSession, getSession } = useSessionRepository();
 
   const handleLogout = async () => {
     const result = await logoutApi();
@@ -44,7 +44,8 @@ export function ProfilePopover({
         <ProfilePicture picture={user?.picture} />
         <UiDivider orientation="horizontal"/> 
         <ProfileInfo 
-          user={user} 
+          user={user}
+          login={getSession()?.username} 
           renderEditEmail={() => <EditEmailButton />}
           renderEditInitials={() => <EditInitialsButton />}
         />

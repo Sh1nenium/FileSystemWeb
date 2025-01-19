@@ -8,6 +8,7 @@ import styles from './loginForm.module.scss'
 import clsx from "clsx"
 import { ROUTES } from "@/shared/constants/routes"
 import { UiButton } from "@/shared/ui"
+import { User, Lock } from 'lucide-react';
 
 type InputForm = {
   login: string,
@@ -37,25 +38,32 @@ export function LoginForm({ className }: { className?: string }) {
   }
 
   return (
-    <form onSubmit={handleSubmit(handle)} className={clsx(className, styles['login-form'])}>
-      <UiInput 
-        control={control}
-        name="login"
-        label="Логин"
-      />
-      <UiInput
-        className={styles['password']}
-        control={control}
-        name="password"
-        label="Пароль"
-        type="password"
-      />
-      <span className={styles['register-link']}>
-        <Link to={ROUTES.REGISTER}>Регистрация</Link>
-      </span>
-      <UiButton type='submit' className={styles['submit']}>
-        Войти
-      </UiButton>
-    </form>
-  )
+    <div className={styles.loginContainer}>
+      <div className={styles.loginBox}>
+        <h1 className={styles.title}>Вход</h1>
+        <form onSubmit={handleSubmit(handle)} className={clsx(className, styles['login-form'])}>
+          <UiInput
+            control={control}
+            name="login"
+            placeholder="Логин"
+            icon={<User size={16} />} 
+          />
+          <UiInput
+            className={styles['password']}
+            control={control}
+            name="password"
+            type="password"
+            placeholder="Пароль"
+            icon={<Lock size={16} />} 
+          />
+          <span className={styles['register-link']}>
+            Нет аккаунта? <Link to={ROUTES.REGISTER}>Зарегистрироваться</Link>
+          </span>
+          <UiButton type="submit" className={styles['submit']}>
+            Войти
+          </UiButton>
+        </form>
+      </div>
+    </div>
+  );
 }

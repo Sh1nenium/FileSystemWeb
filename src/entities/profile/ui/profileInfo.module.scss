@@ -1,25 +1,50 @@
-@mixin flex-column {
+.profile-info {
   display: flex;
   flex-direction: column;
+  gap: 0.5rem; // Уменьшаем отступ между полями
+  padding: 1rem;
+  background-color: #ffffff;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); // Тень для контейнера
 }
 
-.profile-info {
-  @include flex-column;
-  gap: .75rem;
+.field {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem;
+  background-color: #f9f9f9; // Легкий фон для каждого элемента
+  border-radius: 8px;
+  transition: all 0.3s ease;
 
-  .field {
-    display: flex;
-    justify-content: space-between;
+  &:hover {
+    background-color: #f0f0f0; // Изменение фона при наведении
+    cursor: pointer;
+  }
+}
 
-    .content {
-      @include flex-column;
-      gap: .15rem
-    }
+.content {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
 
-    .feature {
-      display: flex;
-      justify-content: flex-end;
-      align-self: center;
-    }
+.label-0,
+.label-1,
+.label-2 {
+  font-size: 0.875rem;
+  font-weight: bold;
+  color: #333;
+}
+
+.value-0,
+.value-1,
+.value-2 {
+  font-size: 1rem;
+  color: #666;
+
+  &::before {
+    content: '• '; // Добавляем маркер перед значением
+    color: #007bff; // Цвет маркера
   }
 }
