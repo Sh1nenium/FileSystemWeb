@@ -52,7 +52,7 @@ export function FileSystemItem({
           </span>
           <span className={styles['created']}>{formatDate(item.createdAt ?? '')}</span>
         </div>
-        <TagList tags={item.tags} onRemoveTag={onRemoveTag} onAddTag={onAddTag} />
+        <TagList tags={item.tags} onRemoveTag={onRemoveTag} />
       </div>
       <div className={styles['actions']}>
         {onAddTag?.()}

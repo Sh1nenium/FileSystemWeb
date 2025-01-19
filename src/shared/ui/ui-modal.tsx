@@ -17,12 +17,12 @@ export function UiModal({
 }) {
   return (
     <Dialog className={clsx(className, styles['ui-modal'])} open={isOpen} onClose={onClose}>
-    <DialogPanel className={styles['content']}>
-      <DialogTitle className={styles['title']}>
-        <span>{title}</span>
-      </DialogTitle>
-      {renderContent?.()}
-    </DialogPanel>
-  </Dialog>
+      <DialogPanel className={styles['content']}>
+        <DialogTitle className={styles['title']}>
+          <span>{title}</span>
+        </DialogTitle>
+        {renderContent?.()}
+      </DialogPanel>
+    </Dialog>
   )
 }

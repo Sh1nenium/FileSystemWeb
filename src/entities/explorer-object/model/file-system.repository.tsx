@@ -6,6 +6,7 @@ import { IS_SUCCESS_STATUS } from "@/shared/api/api-instance";
 import { createFolderApi } from "@/shared/api/file-system/create-folder";
 import { DeleteObjectApi } from "@/shared/api/file-system/delete-object";
 import { editObjectApi } from "@/shared/api/file-system/edit-object";
+import { applyTagApi } from "@/shared/api/file-system/apply-tag";
 
 export function useFileSystemRepository(id?: string) {
   const queryClient = useQueryClient();
@@ -69,12 +70,27 @@ export function useFileSystemRepository(id?: string) {
     return IS_SUCCESS_STATUS(result.status);
   }
 
+  const applyTagMutation = useMutation({
+    mutationFn: (data: { objectId: string, tagId: string }) => applyTagApi(data),
+        onSuccess: () => {
+            toast.success("Объект был успешно обновлен!");
+            queryClient.invalidateQueries(['files']);
+        }
+  });
+
+  const applyTag = async (data: { objectId: string, tagId: string }) => {
+    const result = await applyTagMutation.mutateAsync(data);
+
+    return IS_SUCCESS_STATUS(result.status);
+  }
+
   return {
     objects: query.data?.data,
     query,
     createFile,
     createFolder,
     deleteObject,
-    editObject
+    editObject,
+    applyTag,
   }
 }

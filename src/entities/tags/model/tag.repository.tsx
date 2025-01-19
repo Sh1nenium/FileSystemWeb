@@ -63,7 +63,7 @@ export function useTagsRepository() {
 
 
   return {
-    tags: query.data,
+    tags: query.data?.data,
     createTag,
     updateTag,
     deleteTag,

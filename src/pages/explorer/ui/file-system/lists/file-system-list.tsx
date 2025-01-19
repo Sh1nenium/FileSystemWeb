@@ -8,6 +8,7 @@ import _ from 'lodash';
 import { EditObjectButton } from '@/features/file-system/edit/edit-object-button';
 import { DownloadObject } from '@/features/file-system/download/download-object';
 import { TagAddButton } from '@/features/tags/tag-add-button';
+import { TagListModal } from '@/widgets/tag-list';
 
 export function FileSystemList() {
   const location = useLocation();
@@ -30,29 +31,28 @@ export function FileSystemList() {
   return (
     <div className={styles['list']}>
       {isObjectsArray ? _.map(objects, (item) => (
-        <FileSystemItem
-          key={item.id}
-          onClick={(item) => handleClick(item)}
-          item={item} 
-          onToggleFavorite={(id, isFavorite) => <ToggleFavoriteButton id={id} isFavorite={isFavorite} />}
-          onDelete={(id) => <DeleteObjectButton id={id} />}
-          renderEdit={(id, name, description, type) => 
-            <EditObjectButton id={id} name={name} description={description} type={type} />}
-          renderDownload={(id) => <DownloadObject id={id} />}
-        />  
+        renderFileSystemItem(item, handleClick, id ?? '')
       )) : _.map(convertedObjects?.content, (item) => (
-        <FileSystemItem
-          key={item.id}
-          onClick={(item) => handleClick(item)}
-          item={item} 
-          onToggleFavorite={(id, isFavorite) => <ToggleFavoriteButton id={id} isFavorite={isFavorite} />}
-          onDelete={(id) => <DeleteObjectButton id={id} />}
-          renderEdit={(childId, name, description, type) => 
-            <EditObjectButton id={childId} name={name} description={description} type={type} parentFolderId={id ?? ''}/>}
-          renderDownload={(id) => <DownloadObject id={id} />}
-          onAddTag={() => <TagAddButton id={item.id} />}
-        />
+        renderFileSystemItem(item, handleClick, id ?? '')
       ))}
     </div>  
   );
-} 
+}
+
+const renderFileSystemItem = (item: FileSystemObject, handleClick: (item: FileSystemObject) => void, id?: string) => {
+  return (
+    <FileSystemItem
+      key={item.id}
+      onClick={(item) => handleClick(item)}
+      item={item} 
+      onToggleFavorite={(id, isFavorite) => <ToggleFavoriteButton id={id} isFavorite={isFavorite} />}
+      onDelete={(id) => <DeleteObjectButton id={id} />}
+      renderEdit={(childId, name, description, type) => 
+        <EditObjectButton id={childId} name={name} description={description} type={type} parentFolderId={id ?? ''}/>}
+      renderDownload={(id) => <DownloadObject id={id} />}
+      onAddTag={() => <TagAddButton 
+          id={item.id} 
+          renderModal={(id, isOpen, onClose) => <TagListModal isOpen={isOpen} onClose={onClose} id={id}/>}/>}
+    />
+  )
+}
