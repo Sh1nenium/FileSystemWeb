@@ -41,7 +41,7 @@ export function FileSystemItem({
   return (
     <div className={styles['item']} onClick={() => onClick?.(item)}>
       <div className={styles['icon']}>
-        <IconComponent size={20} /> {/* Correct usage of the icon component */}
+        <IconComponent size={24} /> {/* Correct usage of the icon component */}
       </div>
       <div className={styles['details']}>
         <div className={styles['header']}>

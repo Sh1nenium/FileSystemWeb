@@ -8,6 +8,7 @@ import { FolderClosed } from "lucide-react";
 import { FileSystemList } from "@/pages/explorer/ui/file-system/lists/file-system-list";
 import { AddFileButton } from "@/features/file-system/add/add-file-button";
 import { AddFolderButton } from "@/features/file-system/add/add-folder-button";
+import { useNavigate } from 'react-router-dom';
 
 export function FileExplorer({
   className,
@@ -15,13 +16,20 @@ export function FileExplorer({
   className?: string;
 }) {
   const { user } = useUserRepository();
-  
+  const navigate = useNavigate();
+
+  const handleTitleClick = () => {
+    navigate('/explorer'); 
+  };
+
   return (
     <div className={clsx(className, styles['file-explorer'])}>
       <UiHeader className={styles['header']}>
         <div className={styles['title-container']}>
-          <FolderClosed className={styles['icon']} size={20} /> 
-          <span className={styles['title']}>Проводник</span>
+          <FolderClosed className={styles['icon']} size={24} /> 
+          <span className={styles['title']} onClick={handleTitleClick}>
+            Проводник
+          </span>
         </div>
         <ProfilePopover user={user} />
       </UiHeader>

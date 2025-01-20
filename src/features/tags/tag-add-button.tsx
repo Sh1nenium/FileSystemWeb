@@ -19,7 +19,7 @@ export function TagAddButton({
 
   return (
     <button className={styles['add-tag-button']} onClick={handle}>
-      <Tag size={16} />
+      <Tag size={24} />
       {renderModal?.(id, isOpen.value, onClose)}
     </button>
   );

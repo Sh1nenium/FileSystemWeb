@@ -25,7 +25,7 @@ export function DownloadObject({
       className={styles['download-button']}
       onClick={handle}
     >
-      <Download size={16} />
+      <Download size={24} />
     </button>
   )
 }

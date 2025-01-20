@@ -30,7 +30,7 @@ export function ToggleFavoriteButton({
       className={styles['favorite-button']}
       onClick={handle}
     >
-      <Star size={16} fill={isFavorite ? '#ffd700' : 'none'} />
+      <Star size={24} fill={isFavorite ? '#ffd700' : 'none'} />
     </button>
   )
 }

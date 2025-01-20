@@ -27,7 +27,7 @@ export function EditObjectButton({
 
   return (
     <button onClick={handleClick} className={styles['edit-button']}>
-      <Pencil size={16}/>
+      <Pencil size={24}/>
       <UiModal
         isOpen={isOpen.value}
         onClose={onClose}

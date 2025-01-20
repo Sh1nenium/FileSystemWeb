@@ -44,7 +44,7 @@ export function FileExplorerSideBar({
     <aside className={clsx(className, styles['file-explorer-side-bar'])}>
       <div className={styles['title']}>
         <span className={styles['star-icon']}>
-          <Star size={16} fill="#ffd700" color="#ffd700" />
+          <Star size={24} fill="#ffd700" color="#ffd700" />
         </span>
         <span>Избранное</span>
       </div>

@@ -20,7 +20,7 @@ export function DeleteObjectButton({
       className={styles['delete-button']}
       onClick={handle}
     >
-      <Trash size={16} />
+      <Trash size={24} />
     </button>
   );
 }
