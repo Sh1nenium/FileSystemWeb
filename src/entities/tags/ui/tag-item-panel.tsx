@@ -5,11 +5,13 @@ import styles from './tagItemPanel.module.scss'
 export function TagItemPanel({
   tag,
   isActive,
+  className,
   onClick,
   renderDeleteButton,
   renderEditbutton,
 } : {
   tag: Tag;
+  className?: string;
   isActive?: boolean;
   onClick?: () => void
   renderDeleteButton?: () => React.ReactNode
@@ -17,6 +19,7 @@ export function TagItemPanel({
 }) {
   return (
     <div className={clsx(
+        className,
         styles['tag-item-panel'],
         isActive && styles['active']
       )} 
@@ -25,8 +28,8 @@ export function TagItemPanel({
         <span className={styles['name']}>{tag.name}</span>
       </div>
       <div className={styles['buttons']}>
-        {renderDeleteButton?.()}
         {renderEditbutton?.()}
+        {renderDeleteButton?.()}
       </div>
     </div>
   )
