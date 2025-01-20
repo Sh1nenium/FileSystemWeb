@@ -18,7 +18,7 @@ export function AddFolderButton() {
 
   return (
     <UiButton className={styles['add-button']} onClick={handleClick}>
-      <Plus size={16} />
+       <Plus size={16} className={styles['icon']}/>
       <span>Добавить папку</span>
       <UiModal
         isOpen={isOpen.value}

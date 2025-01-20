@@ -5,14 +5,12 @@
   ц
 
   .header {
-    display: flex;
-    align-items: center;
-    justify-content: space-between; // Выравниваем элементы по краям
     height: 2rem;
     padding: 0 1rem; // Добавляем отступы по бокам
   }
 
   .title-container {
+    justify-self: center;
     display: flex;
     width: fit-content;
     align-items: center;
@@ -59,6 +57,25 @@
         transform: scale(1.1) rotate(360deg); // Увеличение и вращение иконки
       }
     }
+
+    &:hover {
+      .icon {
+        color: #007bff; // Синий цвет при наведении
+        transform: rotate(360deg); // Вращение иконки
+      }
+
+      .title {
+        color: #007bff; // Синий цвет при наведении
+
+        &::after {
+          width: 100%; // Подчеркивание заголовка
+        }
+      }
+    }
+  }
+
+  .profile {
+    justify-self: self-end;
   }
 
   .buttons-container {

@@ -9,6 +9,7 @@ import { EditObjectButton } from '@/features/file-system/edit/edit-object-button
 import { DownloadObject } from '@/features/file-system/download/download-object';
 import { TagAddButton } from '@/features/tags/tag-add-button';
 import { TagListModal } from '@/widgets/tag-list';
+import { Smile } from 'lucide-react';
 
 export function FileSystemList() {
   const location = useLocation();
@@ -28,13 +29,23 @@ export function FileSystemList() {
   const isObjectsArray = objects && Array.isArray(objects);
   const convertedObjects = !isObjectsArray ? objects as { content: FileSystemObject[] } | undefined : undefined;
 
+  const isEmpty = isObjectsArray
+    ? objects.length === 0
+    : convertedObjects?.content.length === 0;
+
+
   return (
     <div className={styles['list']}>
-      {isObjectsArray ? _.map(objects, (item) => (
-        renderFileSystemItem(item, handleClick, id ?? '')
-      )) : _.map(convertedObjects?.content, (item) => (
-        renderFileSystemItem(item, handleClick, id ?? '')
-      ))}
+      {isEmpty ? (
+        <div className={styles.emptyMessage}>
+          <Smile size={32} className={styles.icon} />
+          <span className={styles.text}>Здесь пока пусто</span>
+        </div>
+      ) : (
+        isObjectsArray
+          ? _.map(objects, (item) => renderFileSystemItem(item, handleClick, id ?? ''))
+          : _.map(convertedObjects?.content, (item) => renderFileSystemItem(item, handleClick, id ?? ''))
+      )}
     </div>  
   );
 }

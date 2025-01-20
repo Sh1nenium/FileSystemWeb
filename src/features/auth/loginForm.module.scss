@@ -3,27 +3,62 @@
   justify-content: center;
   align-items: center;
   height: 100vh; // Занимает всю высоту экрана
+  width: 100vh;
 }
 
 .loginBox {
+  display: flex;
+  flex-direction: column;
+  align-items: center; // Центрируем по горизонтали
+  justify-content: center; // Центрируем по вертикали (если нужно)
   background-color: #ffffff;
   padding: 2rem;
-  border-radius: 15px; // Увеличили скругление углов
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2); // Увеличили тень
+  border-radius: 15px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
   width: 100%;
-  max-width: 400px; // Ширина прямоугольника
-  border: 1px solid #e0e0e0; // Добавили границу
+  max-width: 400px;
+  border: 1px solid #e0e0e0;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
 
   &:hover {
-    transform: translateY(-5px); // Поднимаем контейнер при наведении
-    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.3); // Увеличиваем тень при наведении
+    transform: translateY(-5px);
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.3);
+  }
+}
+
+.divider {
+  width: 100%; // Линия занимает всю ширину контейнера
+  height: 1.5px; // Толщина линии
+  background: linear-gradient(99deg, #0fa9ba, #1b6bcc, #491f98); // Градиент между серым и голубым
+  background-size: 200% 100%; // Увеличиваем размер фона для анимации
+  margin-bottom: 2rem;
+  border: none; // Убираем стандартную границу
+  animation: gradientShift 3s linear infinite; // Анимация
+}
+
+@keyframes gradientShift {
+  0% {
+    background-position: 100% 0; // Начальная позиция градиента
+  }
+
+  50% {
+    background-position: -100% 0;
+  }
+  100% {
+    background-position: -100% 0; // Конечная позиция градиента
   }
 }
 
 .login-form {
   display: flex;
   flex-direction: column;
+  width: 100%;
+
+
+
+  .icon {
+    transition: transform 0.2s ease, color 0.2s ease;
+  }
 
   .title {
     height: 2rem;
@@ -36,44 +71,19 @@
     margin-bottom: 1rem;
   }
 
-  input {
-    width: 100%;
-    padding: 0.75rem;
-    border: 1px solid #e0e0e0;
-    border-radius: 8px;
-    font-size: 1rem;
-    color: #333;
-    transition: border-color 0.3s ease, box-shadow 0.3s ease;
-
-    &:focus {
-      border-color: #007bff;
-      box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.25);
-      outline: none;
-    }
-
-    &::placeholder {
-      color: #6c757d;
-      opacity: 1;
-    }
-
-    &:focus::placeholder {
-      color: transparent;
-    }
-  }
-
-  .password {
-    margin-top: 1.5rem; // Увеличили отступ
-  }
-
   .register-link {
-    margin-top: 1rem; // Увеличили отступ
-    text-align: end;
-    color: #007bff;
-    text-decoration: none;
-    font-weight: 500; // Полужирный шрифт
-
-    &:hover {
-      text-decoration: underline;
+    margin-top: 1rem;
+    text-align: center; // Выравниваем текст по центру
+    font-size: 0.875rem; // Уменьшаем размер шрифта
+  
+    a {
+      color: #007bff;
+      text-decoration: none;
+      font-weight: 500;
+  
+      &:hover {
+        text-decoration: underline;
+      }
     }
   }
 
@@ -97,5 +107,17 @@
     &:active {
       transform: translateY(0); // Возвращаем кнопку в исходное положение
     }
+  }
+
+  .error {
+    color: #dc3545;
+    font-size: 0.875rem;
+    text-align: center;
+    margin-bottom: 1rem;
+  }
+
+  .submit:disabled {
+    opacity: 0.7;
+    cursor: not-allowed;
   }
 }

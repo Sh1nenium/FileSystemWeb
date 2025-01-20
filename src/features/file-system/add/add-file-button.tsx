@@ -18,7 +18,7 @@ export function AddFileButton() {
 
   return (
     <UiButton className={styles['add-button']} onClick={handleClick}>
-      <Plus size={16} />
+      <Plus size={16} className={styles['icon']}/>
       <span>Добавить файл</span>
       <UiModal
         isOpen={isOpen.value}

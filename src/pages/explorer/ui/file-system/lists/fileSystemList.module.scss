@@ -5,10 +5,60 @@
     padding: 1rem;
     background-color: #ffffff;
     border-radius: 12px;
-    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+    
     overflow: auto;
 
     .empty {
       text-align: center;
+    }
+
+    .emptyMessage {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      gap: 1rem; // Отступ между иконкой и текстом
+      height: 1000px; // Высота контейнера
+      background-color: #ffffff;
+      border-radius: 12px;
+      padding: 1.5rem;
+      animation: fadeIn 0.5s ease-in-out; // Анимация появления
+    }
+    
+    .icon {
+      color: #007bff; // Цвет иконки
+      animation: bounce 2s infinite; // Анимация иконки
+    }
+    
+    .text {
+      font-size: 1.5rem;
+      font-weight: 600;
+      background: linear-gradient(135deg, #007bff, #00bfff); // Градиентный текст
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      color: transparent;
+    }
+    
+    // Анимация появления
+    @keyframes fadeIn {
+      0% {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      100% {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    
+    // Анимация иконки
+    @keyframes bounce {
+      0%, 100% {
+        transform: translateY(0);
+      }
+      50% {
+        transform: translateY(-10px);
+      }
     }
 }

@@ -35,6 +35,7 @@ export function ProfilePopover({
     <Popover className={clsx(className, styles['profile-popover'])}>
       <PopoverButton className={styles['popover-button']}>
         <div className={styles['profile-container']}>
+        <ChevronDown className={styles['arrow']} size={16} /> {/* Иконка стрелки */}
           {user?.picture ? (
             <img
               className={styles['image']}
@@ -44,7 +45,6 @@ export function ProfilePopover({
           ) : (
             <ProfileIcon className={styles['image']} size={32} />
           )}
-          <ChevronDown className={styles['arrow']} size={16} /> {/* Иконка стрелки */}
         </div>
       </PopoverButton>
       <PopoverPanel

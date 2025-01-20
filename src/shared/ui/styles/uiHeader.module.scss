@@ -1,4 +1,6 @@
 .ui-header {
-  display: flex;
+  
+  display: grid;
+  grid-template-columns: 100px 1fr 100px;
   justify-content: space-between;
 }

@@ -9,6 +9,7 @@ import { FileSystemList } from "@/pages/explorer/ui/file-system/lists/file-syste
 import { AddFileButton } from "@/features/file-system/add/add-file-button";
 import { AddFolderButton } from "@/features/file-system/add/add-folder-button";
 import { useNavigate } from 'react-router-dom';
+import React from "react";
 
 export function FileExplorer({
   className,
@@ -25,13 +26,15 @@ export function FileExplorer({
   return (
     <div className={clsx(className, styles['file-explorer'])}>
       <UiHeader className={styles['header']}>
-        <div className={styles['title-container']}>
-          <FolderClosed className={styles['icon']} size={24} /> 
-          <span className={styles['title']} onClick={handleTitleClick}>
-            Проводник
-          </span>
-        </div>
-        <ProfilePopover user={user} />
+        <React.Fragment> <div></div>      
+          <div className={styles['title-container']}>
+            <FolderClosed className={styles['icon']} size={24} /> 
+            <span className={styles['title']} onClick={handleTitleClick}>
+              Проводник
+            </span>
+          </div>
+        </React.Fragment>
+        <ProfilePopover user={user} className={styles["profile"]} />
       </UiHeader>
       <UiDivider orientation="horizontal" />
       <div className={styles['buttons-container']}>

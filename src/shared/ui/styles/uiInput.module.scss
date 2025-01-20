@@ -1,36 +1,65 @@
 .ui-input {
-  display: flex;
-  flex-direction: column;
-  gap: 0.25rem;
+  width: 100%;
+  margin-bottom: 1rem;
+}
+
+.label {
+  display: block;
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: #333;
+  margin-bottom: 0.5rem;
 }
 
 .inputContainer {
-  position: relative;
   display: flex;
   align-items: center;
+  width: 100%;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  overflow: hidden;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease; // Анимация для границы и тени
+}
+
+.iconDivider {
+  display: flex;
+  align-items: center;
+  padding: 0 0.75rem;
+  background-color: #f9f9f9;
+  border-right: 1px solid #e0e0e0;
 }
 
 .icon {
-  margin-right: 0.5rem;
-  color: #666;
+  color: #6c757d;
 }
 
 .input {
-  padding-left: 40px; 
-  width: 100%;
-  padding: 0.5rem;
-  border: 1px solid #ccc;
-  border-radius: 5px;
+  flex: 1;
+  padding: 0.75rem;
+  border: 0;
   font-size: 1rem;
-  background-color: #f9f9f9;
   color: #333;
-  transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+  outline: none;
 
-  &:focus {
-    outline: none;
-    border-color: #007bff;
-    box-shadow: 0 0 10px rgba(0, 123, 255, 0.5);
-    background-color: #ffffff;
-    color: #000000;
+
+  &::placeholder {
+    color: #6c757d;
+    opacity: 1;
   }
+
+  &:focus::placeholder {
+    color: transparent;
+  }
+}
+
+input:focus + .icon {
+  transform: scale(1.1);
+  color: #007bff;
+
+}
+
+// Подсветка контейнера при фокусе на инпуте
+.inputContainer:focus-within {
+  border-color: #007bff; // Изменение цвета границы
+  box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.25); // Тень при фокусе
 }
