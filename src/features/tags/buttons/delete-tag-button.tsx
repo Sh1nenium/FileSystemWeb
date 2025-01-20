@@ -1,5 +1,5 @@
 import { Trash } from 'lucide-react';
-import styles from './deleteTagButton.module.scss';
+import styles from './styles/deleteTagButton.module.scss';
 import { useTagsRepository } from '@/entities/tags';
 
 export function DeleteTagButton({

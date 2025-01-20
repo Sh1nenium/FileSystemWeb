@@ -3,7 +3,7 @@ import styles from './fileExplorerSideBar.module.scss'
 import { UiDivider } from "@/shared/ui/ui-divider"
 import { useFavoritesRepository } from "@/entities/explorer-object/model/favorite.repository"
 import { File, Folder, Star, X } from 'lucide-react';
-import { useState } from "react";
+import { MouseEvent, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 export function FileExplorerSideBar({
@@ -32,7 +32,8 @@ export function FileExplorerSideBar({
     }
   });
 
-  const handleRemoveFavorite = (id: string) => {
+  const handleRemoveFavorite = (id: string, e: MouseEvent) => {
+    e.stopPropagation();
     deleteFromFavorite(id);
   };
 
@@ -99,7 +100,7 @@ export function FileExplorerSideBar({
               <span className={styles['name']}>{item.name}</span>
               <button
                 className={styles['remove-button']}
-                onClick={() => handleRemoveFavorite(item.id)}
+                onClick={(e) => handleRemoveFavorite(item.id, e)}
               >
                 <X size={16} />
               </button>

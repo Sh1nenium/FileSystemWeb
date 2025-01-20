@@ -1,5 +1,5 @@
 import { UiButton } from "@/shared/ui";
-import { Plus } from "lucide-react";
+import { FolderPlus } from "lucide-react";
 import styles from './addButton.module.scss'
 import { UiModal } from "@/shared/ui/ui-modal";
 import { useModal } from "@/shared/utils/modal";
@@ -18,8 +18,7 @@ export function AddFolderButton() {
 
   return (
     <UiButton className={styles['add-button']} onClick={handleClick}>
-       <Plus size={16} className={styles['icon']}/>
-      <span>Добавить папку</span>
+      <FolderPlus size={32} className={styles['icon']}/>
       <UiModal
         isOpen={isOpen.value}
         onClose={onClose}

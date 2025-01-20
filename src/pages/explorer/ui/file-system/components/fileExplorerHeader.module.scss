@@ -1,0 +1,77 @@
+.header {
+    display: grid;
+    align-items: center;
+    justify-content: space-between;
+    height: rem;
+    padding: 0rem 0rem 0 1rem // up right down left; 
+  }
+
+  .buttons-container {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem
+  }
+
+  .title-container {
+    display: flex;
+    justify-self: center;
+    align-items: center;
+    gap: 0.5rem; 
+    cursor: pointer; 
+
+    .title {
+      position: relative;
+      transition: color 0.2s, transform 0.2s;
+      font-size: 1.5rem;
+      font-weight: bold;
+      color: #333;
+
+      &::after {
+        content: '';
+        position: absolute;
+        left: 0;
+        bottom: -2px;
+        width: 0;
+        height: 2px;
+        background-color: #007bff; 
+        transition: width 0.3s ease;
+      }
+    }
+
+    .icon {
+      transition: transform 0.3s ease, color 0.3s ease;
+    }
+
+    &:hover {
+      .title {
+        transform: scale(1.05);
+
+        &::after {
+          width: 100%; 
+        }
+      }
+
+      .icon {
+        transform: scale(1.1) rotate(360deg); // Увеличение и вращение иконки
+      }
+    }
+
+    &:hover {
+      .icon {
+        color: #007bff; // Синий цвет при наведении
+        transform: rotate(360deg); // Вращение иконки
+      }
+
+      .title {
+        color: #007bff; // Синий цвет при наведении
+
+        &::after {
+          width: 100%; // Подчеркивание заголовка
+        }
+      }
+    }
+  }
+
+  .profile {
+    justify-self: right;
+  }

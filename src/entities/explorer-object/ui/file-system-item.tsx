@@ -15,6 +15,7 @@ import styles from './fileSystemItem.module.scss';
 import { FileModel, FileSystemObject, FolderModel } from '@/entities/explorer-object';
 import { TagList } from './tag-list';
 import React from 'react';
+import { UiDivider } from '@/shared/ui/ui-divider';
 
 export function FileSystemItem({
   item,
@@ -24,7 +25,8 @@ export function FileSystemItem({
   onToggleFavorite,
   onDelete,
   renderEdit,
-  renderDownload
+  renderDownload,
+  renderShareLink
 }: {
   item: FileSystemObject;
   onClick?: (item: FileSystemObject) => void;
@@ -34,6 +36,7 @@ export function FileSystemItem({
   onDelete?: (itemId: string) => React.ReactNode;
   renderEdit?: (itemId: string, name: string, description: string, type: "File" | "Folder") => React.ReactNode;
   renderDownload?: (itemId: string) => React.ReactNode;
+  renderShareLink?: (itemId: string) => React.ReactNode;
 }) {
   const isFolder = item.type === 'Folder';
   const IconComponent = isFolder ? Folder : getFileIcon(item.name);
@@ -41,7 +44,7 @@ export function FileSystemItem({
   return (
     <div className={styles['item']} onClick={() => onClick?.(item)}>
       <div className={styles['icon']}>
-        <IconComponent size={24} /> {/* Correct usage of the icon component */}
+        <IconComponent size={36} /> 
       </div>
       <div className={styles['details']}>
         <div className={styles['header']}>
@@ -67,11 +70,13 @@ export function FileSystemItem({
         </div>
         <TagList tags={item.tags} onRemoveTag={onRemoveTag} />
       </div>
+      <hr className={styles.dividerButtons} /> 
       <div className={styles['actions']}>
         {onAddTag?.()}
+        {renderShareLink?.(item.id)}
         {renderDownload?.(item.id)}
-        {renderEdit?.(item.id, item.name, (item as FileModel).description, item.type)}
         {onToggleFavorite?.(item.id, item.isFavorite)}
+        {renderEdit?.(item.id, item.name, (item as FileModel).description, item.type)}
         {onDelete?.(item.id)}
       </div>
     </div>

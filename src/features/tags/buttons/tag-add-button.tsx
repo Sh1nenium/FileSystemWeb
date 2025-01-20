@@ -1,5 +1,5 @@
 import { Tag } from 'lucide-react'; 
-import styles from './tagAddButton.module.scss';
+import styles from './styles/tagAddButton.module.scss';
 import { useModal } from '@/shared/utils/modal';
 
 export function TagAddButton({

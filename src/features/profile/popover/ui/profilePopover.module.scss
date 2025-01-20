@@ -31,11 +31,32 @@
 .arrow {
   color: #6c757d; 
   transition: transform 0.2s ease; 
+
+
+}
+
+.arrow {
+  color: #6c757d;
+  transition: transform 0.2s ease; // Плавный поворот
+}
+
+.arrow {
+  color: #6c757d;
+  transition: transform 0.2s ease; // Плавный поворот и увеличение
 }
 
 .popover-button:hover .arrow {
-  transform: scale(1.2)
+  transform: scale(1.1); // Увеличение стрелки при наведении
 }
+
+.arrow-rotated {
+  transform: rotate(180deg) scale(1.1); // Поворот и увеличение при открытии
+}
+
+.popover-button:hover .arrow-rotated {
+  transform: rotate(180deg) scale(1.2); // Увеличение при наведении на открытую стрелку
+}
+
 
 .popover-panel {
   background-color: #ffffff;
@@ -88,6 +109,6 @@
   }
 
   &:active {
-    transform: translateY(0);
+    transform: translateY(0)
   }
 }

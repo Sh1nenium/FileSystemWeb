@@ -7,9 +7,10 @@ import { ToggleFavoriteButton } from '@/features/favorites/toggle-favorite-butto
 import _ from 'lodash';
 import { EditObjectButton } from '@/features/file-system/edit/edit-object-button';
 import { DownloadObject } from '@/features/file-system/download/download-object';
-import { TagAddButton } from '@/features/tags/tag-add-button';
+import { TagAddButton } from '@/features/tags/buttons/tag-add-button';
 import { TagListModal } from '@/widgets/tag-list';
-import { Smile } from 'lucide-react';
+import { Sticker } from 'lucide-react';
+import { ShareLinkObjectButton } from '@/features/file-system/link/share-link-object-button';
 
 export function FileSystemList() {
   const location = useLocation();
@@ -38,7 +39,7 @@ export function FileSystemList() {
     <div className={styles['list']}>
       {isEmpty ? (
         <div className={styles.emptyMessage}>
-          <Smile size={32} className={styles.icon} />
+          <Sticker  size={64} className={styles.icon} />
           <span className={styles.text}>Здесь пока пусто</span>
         </div>
       ) : (
@@ -63,7 +64,8 @@ const renderFileSystemItem = (item: FileSystemObject, handleClick: (item: FileSy
       renderDownload={(id) => <DownloadObject id={id} />}
       onAddTag={() => <TagAddButton 
           id={item.id} 
-          renderModal={(id, isOpen, onClose) => <TagListModal isOpen={isOpen} onClose={onClose} id={id}/>}/>}
+          renderModal={(id, isOpen, onClose) => <TagListModal isOpen={isOpen} onClose={onClose} objectId={id}/>}/>}
+      renderShareLink={(id) => <ShareLinkObjectButton id= {id} />}
     />
   )
 }

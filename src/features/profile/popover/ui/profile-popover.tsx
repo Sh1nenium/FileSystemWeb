@@ -9,7 +9,7 @@ import { useSessionRepository } from "@/entities/session";
 import { logoutApi } from "@/shared/api/auth/logout";
 import { IS_SUCCESS_STATUS } from "@/shared/api/api-instance";
 import { EditEmailButton, EditInitialsButton } from "../../edit";
-import { ChevronDown } from 'lucide-react'; // Импортируем иконку стрелки
+import { ChevronDown, ChevronUp } from 'lucide-react'; // Импортируем иконку стрелки
 
 export function ProfilePopover({
   className,
@@ -33,40 +33,50 @@ export function ProfilePopover({
   
   return (
     <Popover className={clsx(className, styles['profile-popover'])}>
-      <PopoverButton className={styles['popover-button']}>
-        <div className={styles['profile-container']}>
-        <ChevronDown className={styles['arrow']} size={16} /> {/* Иконка стрелки */}
-          {user?.picture ? (
-            <img
-              className={styles['image']}
-              src={`data:image/png;base64,${user.picture}`}
-              alt="profile"
+      {({ open }) => ( // Получаем состояние `open`
+        <>
+          <PopoverButton className={styles['popover-button']}>
+            <div className={styles['profile-container']}>
+            <ChevronDown
+                className={clsx(
+                  styles['arrow'],
+                  open && styles['arrow-rotated'] // Класс для поворота стрелки
+                )}
+                size={24}
+              />
+              {user?.picture ? (
+                <img
+                  className={styles['image']}
+                  src={`data:image/png;base64,${user.picture}`}
+                  alt="profile"
+                />
+              ) : (
+                <ProfileIcon className={styles['image']} size={32} />
+              )}
+            </div>
+          </PopoverButton>
+          <PopoverPanel
+            transition
+            anchor="top end"
+            className={styles['popover-panel']}
+          >
+            <div className={styles['profile-header']}>
+              <ProfilePicture picture={user?.picture} />
+              <h1 className={styles['username']}>{getSession()?.username}</h1>
+            </div>
+            <UiDivider orientation="horizontal" />
+            <ProfileInfo
+              user={user}
+              login={getSession()?.username}
+              renderEditEmail={() => <EditEmailButton />}
+              renderEditInitials={() => <EditInitialsButton />}
             />
-          ) : (
-            <ProfileIcon className={styles['image']} size={32} />
-          )}
-        </div>
-      </PopoverButton>
-      <PopoverPanel
-        transition
-        anchor="top end"
-        className={styles['popover-panel']}
-      >
-        <div className={styles['profile-header']}>
-          <ProfilePicture picture={user?.picture} />
-          <h1 className={styles['username']}>{getSession()?.username}</h1>
-        </div>
-        <UiDivider orientation="horizontal" />
-        <ProfileInfo
-          user={user}
-          login={getSession()?.username}
-          renderEditEmail={() => <EditEmailButton />}
-          renderEditInitials={() => <EditInitialsButton />}
-        />
-        <UiButton onClick={handleLogout} className={styles['logout-button']}>
-          Выход
-        </UiButton>
-      </PopoverPanel>
+            <UiButton onClick={handleLogout} className={styles['logout-button']}>
+              Выход
+            </UiButton>
+          </PopoverPanel>
+        </>
+      )}
     </Popover>
   );
 }

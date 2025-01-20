@@ -1,4 +1,4 @@
-import { Plus } from "lucide-react";
+import { FileUp} from "lucide-react";
 import { UiButton } from "@/shared/ui";
 import styles from './addButton.module.scss'
 import { UiModal } from "@/shared/ui/ui-modal";
@@ -18,12 +18,11 @@ export function AddFileButton() {
 
   return (
     <UiButton className={styles['add-button']} onClick={handleClick}>
-      <Plus size={16} className={styles['icon']}/>
-      <span>Добавить файл</span>
+      <FileUp size={32} className={styles['icon']}/>
       <UiModal
+        title= {() => "title"}
         isOpen={isOpen.value}
         onClose={onClose}
-        title={() => "Добавить файл"}
         renderContent={() => <AddFileForm parentFolderId={id ?? ''} onClose={onClose}/>}
       />
     </UiButton>

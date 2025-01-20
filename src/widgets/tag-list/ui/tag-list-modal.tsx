@@ -1,15 +1,15 @@
 import { UiModal } from "@/shared/ui/ui-modal"
 import { TagLists } from "./tag-lists"
 import styles from './tagListModal.module.scss'
-import { AddTagForm } from "@/features/tags/add-tag-form";
-import { TagAddButton } from "@/features/tags/tag-add-button";
+import { AddTagForm } from "@/features/tags/forms/add-tag-form";
+import { TagAddButton } from "@/features/tags/buttons/tag-add-button";
 
 export function TagListModal({
-  id,
+  objectId: objectId,
   isOpen,
   onClose
 } : {
-  id: string;
+  objectId: string;
   isOpen: boolean,
   onClose: () => void
 }) {
@@ -19,7 +19,7 @@ export function TagListModal({
       onClose={onClose}
       title={() => <div className={styles['title']}>
         <span>Применить тэг</span>
-        <TagAddButton id={id} 
+        <TagAddButton id={objectId} 
           renderModal={(_id, isOpen, onClose) => (
             <UiModal
               isOpen={isOpen}
@@ -30,7 +30,7 @@ export function TagListModal({
           )}
         />
       </div>}
-      renderContent={() => <TagLists className={styles['tag-lists']} objectId={id} />}
+      renderContent={() => <TagLists className={styles['tag-lists']} objectId={objectId} />}
     />
   )
 }

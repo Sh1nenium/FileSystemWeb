@@ -1,8 +1,8 @@
 import { useFileSystemRepository } from "@/entities/explorer-object";
 import { TagItemPanel, useTagsRepository } from "@/entities/tags"
-import { DeleteTagButton } from "@/features/tags/delete-tag-button";
-import { EditTagButton } from "@/features/tags/edit-tag-button";
-import { EditTagForm } from "@/features/tags/edit-tag-form";
+import { DeleteTagButton } from "@/features/tags/buttons/delete-tag-button";
+import { EditTagButton } from "@/features/tags/buttons/edit-tag-button";
+import { EditTagForm } from "@/features/tags/forms/edit-tag-form";
 import { UiModal } from "@/shared/ui/ui-modal";
 import styles from './tagLists.module.scss'
 import _ from "lodash"

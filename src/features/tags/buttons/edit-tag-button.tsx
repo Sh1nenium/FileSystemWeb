@@ -1,5 +1,5 @@
 import { Pencil } from 'lucide-react';
-import styles from './editTagButton.module.scss';
+import styles from './styles/editTagButton.module.scss';
 import { useModal } from '@/shared/utils/modal';
 
 export function EditTagButton({

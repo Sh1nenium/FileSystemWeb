@@ -2,6 +2,7 @@ import { useForm } from 'react-hook-form';
 import styles from './form.module.scss';
 import { useTagsRepository } from '@/entities/tags';
 import { UiButton, UiInput } from '@/shared/ui';
+import { useFileSystemRepository } from '@/entities/explorer-object/model/file-system.repository';
 
 type InputForm = {
   name: string;
@@ -20,12 +21,14 @@ export function AddTagForm({
     }
   });
 
+  const { query } = useFileSystemRepository();
   const { createTag } = useTagsRepository();
 
   const handle = async (data: InputForm) => {
     const success = await createTag(data); 
 
     if (success) {
+      query.refetch();
       onClose?.();
       return;
     }

@@ -1,2 +1,2 @@
 export { FileExplorer } from './file-explorer'
-export { FileExplorerSideBar } from './file-explorer-side-bar' 
+export { FileExplorerSideBar } from './components/file-explorer-side-bar' 
