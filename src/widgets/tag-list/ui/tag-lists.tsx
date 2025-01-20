@@ -21,7 +21,6 @@ export function TagLists({
 
   const handleClick = async (isActive: boolean, tagId: string) => {
     if (isActive) {
-      console.log('1')
       await removeTag({
         objectId,
         tagId
