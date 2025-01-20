@@ -1,56 +1,68 @@
-import { useForm } from 'react-hook-form';
-import styles from './form.module.scss'
+import { useForm, Controller } from 'react-hook-form';
+import styles from './form.module.scss';
 import { UiButton, UiInput } from '@/shared/ui';
 import { useFileSystemRepository } from '@/entities/explorer-object';
-import _ from 'lodash';
 
 type InputForm = {
-  form: File | string;
+  form: File | null;
   description: string;
-}
+};
 
 export function AddFileForm({
   parentFolderId,
-  onClose
-} : {
+  onClose,
+}: {
   parentFolderId?: string;
   onClose?: () => void;
 }) {
   const { handleSubmit, control } = useForm<InputForm>({
     defaultValues: {
-      form: '',
-      description: ''
-    }
+      form: null,
+      description: '',
+    },
   });
 
   const { createFile } = useFileSystemRepository();
 
   const handle = async (data: InputForm) => {
+    if (!data.form) {
+      console.error('Файл не выбран');
+      return;
+    }
+
     const success = await createFile({
-      form: new File([data.form], _.split(data.form as File['name'], '/').pop() as string),
+      form: data.form,
       parentFolderId: parentFolderId || '',
-      description: data.description 
+      description: data.description,
     });
 
     if (success) {
       onClose?.();
       return;
     }
-  }
+  };
 
   return (
     <form onSubmit={handleSubmit(handle)} className={styles['form']}>
       <UiInput
         control={control}
         name="description"
-        label='Описание'
+        label="Описание"
         placeholder="Описание файла"
       />
-      <UiInput
+      <Controller
         control={control}
         name="form"
-        label='Файл'
-        type="file"
+        render={({ field }) => (
+          <input
+            type="file"
+            onChange={(e) => {
+              if (e.target.files && e.target.files[0]) {
+                field.onChange(e.target.files[0]);
+              }
+            }}
+          />
+        )}
       />
       <div className={styles['buttons']}>
         <UiButton type="submit" className={styles['save-button']}>
@@ -61,5 +73,5 @@ export function AddFileForm({
         </UiButton>
       </div>
     </form>
-  )
+  );
 }

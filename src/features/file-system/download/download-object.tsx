@@ -16,7 +16,7 @@ export function DownloadObject({
     const url = window.URL.createObjectURL(result.data as Blob);
     const link = document.createElement('a');
     link.href = url;
-    link.download = _.split(result.headers["content-disposition"], "attachment; filename=")[1];
+    link.download = _.split(_.split(result.headers["content-disposition"], "attachment; filename=")[1], ";")[0]; 
     link.click();
   }
 
