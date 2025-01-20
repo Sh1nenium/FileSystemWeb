@@ -18,7 +18,7 @@ export function EditEmailButton({ className }: { className?: string }) {
       <UiModal
         isOpen={isOpen.value}
         onClose={onClose}
-        title="Изменить почту"
+        title={() => "Изменить почту"}
         renderContent={() => <EditEmailForm onClose={onClose}/>}
       />
     </button>

@@ -31,7 +31,7 @@ export function EditObjectButton({
       <UiModal
         isOpen={isOpen.value}
         onClose={onClose}
-        title="Редактировать"
+        title={() => `Изменить ${type === 'File' ? 'файл' : 'папку'}`}
         renderContent={() => <EditObjectForm
           type={type} 
           parentFolderId={parentFolderId} 

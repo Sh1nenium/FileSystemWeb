@@ -10,7 +10,7 @@ export function UiModal({
   renderContent
 } : {
   className?: string;
-  title?: string;
+  title?: () => React.ReactNode;
   isOpen: boolean;
   onClose: () => void;
   renderContent?: () => React.ReactNode
@@ -19,7 +19,7 @@ export function UiModal({
     <Dialog className={clsx(className, styles['ui-modal'])} open={isOpen} onClose={onClose}>
       <DialogPanel className={styles['content']}>
         <DialogTitle className={styles['title']}>
-          <span>{title}</span>
+          <span>{title?.()}</span>
         </DialogTitle>
         {renderContent?.()}
       </DialogPanel>

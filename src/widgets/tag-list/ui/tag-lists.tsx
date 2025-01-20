@@ -52,7 +52,7 @@ export function TagLists({
                 <UiModal
                   isOpen={isOpen}
                   onClose={onClose}
-                  title="Редактировать тэг"
+                  title={() => "Редактировать тэг"}
                   renderContent={() => <EditTagForm id={id} onClose={onClose} tag={tag}/>}
                 />
               )}/>}

@@ -1,3 +1,11 @@
 .tag-lists {
-  width: 15rem;
+  width: 20rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.title {
+  display: flex;
+  gap: 1rem;
 }

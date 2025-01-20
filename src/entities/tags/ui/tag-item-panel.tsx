@@ -26,6 +26,7 @@ export function TagItemPanel({
         onClick={onClick}>
       <div className={styles['tag-item']}>
         <span className={styles['name']}>{tag.name}</span>
+        <span className={styles['description']}>{tag.description}</span>
       </div>
       <div className={styles['buttons']}>
         {renderEditbutton?.()}

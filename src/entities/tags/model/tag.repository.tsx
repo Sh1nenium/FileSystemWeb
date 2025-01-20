@@ -13,7 +13,7 @@ export function useTagsRepository() {
   const query = useQuery(['tags'], GetAllTagsApi);
   
   const createTagMutation = useMutation({
-    mutationFn: (data: Tag) => CreateTagApi(data),
+    mutationFn: (data: Omit<Tag, 'id'>) => CreateTagApi(data),
         onSuccess: () => {
             toast.success("Метка была успешно создана!");
             queryClient.invalidateQueries(['tags']);
@@ -37,7 +37,7 @@ export function useTagsRepository() {
   });
 
 
-  const createTag = async (data: Tag) => {
+  const createTag = async (data: Omit<Tag, 'id'>) => {
     const result = await createTagMutation.mutateAsync(data);
     return IS_SUCCESS_STATUS(result.status);
   }
