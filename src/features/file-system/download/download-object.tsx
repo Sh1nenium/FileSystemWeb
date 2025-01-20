@@ -1,6 +1,7 @@
 import { Download } from "lucide-react";
 import styles from './downloadObject.module.scss'
 import { downloadObjectApi } from "@/shared/api/file-system/download-object";
+import _ from "lodash";
 
 export function DownloadObject({
   id
@@ -15,7 +16,7 @@ export function DownloadObject({
     const url = window.URL.createObjectURL(result.data as Blob);
     const link = document.createElement('a');
     link.href = url;
-    link.download = result.headers["content-disposition"].split("attachment; filename=")[1];
+    link.download = _.split(result.headers["content-disposition"], "attachment; filename=")[1];
     link.click();
   }
 
