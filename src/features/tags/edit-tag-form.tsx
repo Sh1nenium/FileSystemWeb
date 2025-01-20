@@ -45,12 +45,14 @@ export function EditTagForm({
       <UiInput 
         name="name"
         control={control}
+        label="Название"
         placeholder="Название тега"
         className={styles['input']} 
       />
       <UiInput 
         name="description"
         control={control}
+        label="Описание"
         placeholder="Описание тега"
         className={styles['input']} 
       />

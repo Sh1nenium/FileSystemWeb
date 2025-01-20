@@ -7,6 +7,7 @@ import { createFolderApi } from "@/shared/api/file-system/create-folder";
 import { DeleteObjectApi } from "@/shared/api/file-system/delete-object";
 import { editObjectApi } from "@/shared/api/file-system/edit-object";
 import { applyTagApi } from "@/shared/api/file-system/apply-tag";
+import { removeTagApi } from "@/shared/api/file-system/remove-tag";
 
 export function useFileSystemRepository(id?: string) {
   const queryClient = useQueryClient();
@@ -78,6 +79,20 @@ export function useFileSystemRepository(id?: string) {
         }
   });
 
+  const removeTagMutation = useMutation({
+    mutationFn: (data: { objectId: string, tagId: string }) => removeTagApi(data),
+        onSuccess: () => {
+            toast.success("Объект был успешно обновлен!");
+            queryClient.invalidateQueries(['files']);
+        }
+  });
+
+  const removeTag = async (data: { objectId: string, tagId: string }) => {
+    const result = await removeTagMutation.mutateAsync(data);
+
+    return IS_SUCCESS_STATUS(result.status);
+  }
+
   const applyTag = async (data: { objectId: string, tagId: string }) => {
     const result = await applyTagMutation.mutateAsync(data);
 
@@ -92,5 +107,6 @@ export function useFileSystemRepository(id?: string) {
     deleteObject,
     editObject,
     applyTag,
+    removeTag,
   }
 }
