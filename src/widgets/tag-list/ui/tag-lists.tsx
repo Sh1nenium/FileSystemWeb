@@ -21,7 +21,6 @@ export function TagLists({
 
   const handleClick = async (isActive: boolean, tagId: string) => {
     if (isActive) {
-      console.log('1')
       await removeTag({
         objectId,
         tagId
@@ -53,7 +52,7 @@ export function TagLists({
                 <UiModal
                   isOpen={isOpen}
                   onClose={onClose}
-                  title="Редактировать тэг"
+                  title={() => "Редактировать тэг"}
                   renderContent={() => <EditTagForm id={id} onClose={onClose} tag={tag}/>}
                 />
               )}/>}

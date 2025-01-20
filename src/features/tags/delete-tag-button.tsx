@@ -1,20 +1,18 @@
 import { Trash } from 'lucide-react';
 import styles from './deleteTagButton.module.scss';
-import { useModal } from '@/shared/utils/modal';
+import { useTagsRepository } from '@/entities/tags';
 
 export function DeleteTagButton({
   id,
-  renderModal
 } : {
   id: string;
-  renderModal?: (id: string, isOpen: boolean, onClose: () => void) => React.ReactNode
 }) {
-  const { isOpen, onClose, onOpen } = useModal();
+  const { deleteTag } = useTagsRepository();
 
   const handle = async (e: React.MouseEvent) => {
     e.stopPropagation();
 
-    onOpen();
+    await deleteTag(id);
   }
 
   return (
@@ -23,7 +21,6 @@ export function DeleteTagButton({
       onClick={handle}
     >
       <Trash size={16} />
-      {renderModal?.(id, isOpen.value, onClose)}
     </button>
   )
 }
