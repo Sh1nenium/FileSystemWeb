@@ -15,7 +15,6 @@ import styles from './fileSystemItem.module.scss';
 import { FileModel, FileSystemObject, FolderModel } from '@/entities/explorer-object';
 import { TagList } from './tag-list';
 import React from 'react';
-import { UiDivider } from '@/shared/ui/ui-divider';
 
 export function FileSystemItem({
   item,

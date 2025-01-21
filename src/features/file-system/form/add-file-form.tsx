@@ -20,7 +20,7 @@ export function AddFileForm({
   const {
     handleSubmit,
     control,
-    formState: { errors },
+    // formState: { errors },
   } = useForm<InputForm>({
     defaultValues: {
       form: null,

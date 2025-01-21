@@ -1,6 +1,5 @@
-import { Link, Trash } from "lucide-react";
+import { Link } from "lucide-react";
 import styles from './shareLinkObjectButton.module.scss';
-import { useFileSystemRepository } from "@/entities/explorer-object";
 
 export function ShareLinkObjectButton({
   id

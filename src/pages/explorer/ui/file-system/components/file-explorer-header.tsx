@@ -11,11 +11,7 @@ import { FolderClosed } from "lucide-react";
 import styles from "./fileExplorerHeader.module.scss"
 import { FileExplorerCountPanel } from "./file-explorer-count-panel";
 
-export function FileExplorerHeader({
-    className,
-} : {
-    className?: string
-}) {
+export function FileExplorerHeader() {
     const navigate = useNavigate();
 
     const { user } = useUserRepository();

@@ -9,7 +9,7 @@ import { UiButton } from '@/shared/ui';
 import { signupApi } from '@/shared/api/auth/signup';
 import { User, Lock, Mail } from 'lucide-react';
 import { useState } from 'react';
-import axios, { AxiosError } from 'axios';
+import axios from 'axios';
 import { toast } from 'react-toastify';
 
 type InputForm = {

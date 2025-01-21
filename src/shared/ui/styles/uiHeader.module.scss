@@ -1,5 +1,5 @@
 .ui-header {
   display: grid;
-  grid-template-columns: 200px 1fr 1fr 200px;
-  justify-content: space-between;
+  grid-template-columns: 200px 1fr auto auto;
+  justify-items: center ;
 }

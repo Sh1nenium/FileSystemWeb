@@ -19,7 +19,7 @@ type InputForm = {
 }
 
 export function LoginForm({ className }: { className?: string }) {
-  const [isLoading, setIsLoading] = useState(false);
+  const [_isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const navigate = useNavigate();
   const location = useLocation();
