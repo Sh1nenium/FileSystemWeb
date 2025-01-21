@@ -4,6 +4,7 @@ import styles from './form.module.scss'
 import { UiButton, UiInput } from "@/shared/ui";
 import { useEffect } from "react";
 import { useUserRepository } from "@/entities/profile";
+import { CaseSensitive } from "lucide-react";
 
 type InputForm = {
   name: string;
@@ -49,15 +50,17 @@ export function EditInitialsForm({
   return (
     <form onSubmit={handleSubmit(handle)} className={clsx(className, styles['edit-form'])}>
       <UiInput 
+        icon = {<CaseSensitive/>}
         name="name"
         control={control}
-        placeholder="Имя"
+        placeholder="Введите имя..."
         className={styles['input']} 
       />
       <UiInput 
+        icon = {<CaseSensitive/>}
         name="surname"
         control={control}
-        placeholder="Фамилия"
+        placeholder="Введите фамилию..."
         className={styles['input']} 
       />
       <div className={styles['buttons']}>

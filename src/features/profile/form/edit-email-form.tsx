@@ -4,6 +4,7 @@ import styles from './form.module.scss'
 import { UiButton, UiInput } from "@/shared/ui";
 import { useEffect } from "react";
 import { useUserRepository } from "@/entities/profile";
+import { Mail } from 'lucide-react';
 
 type InputForm = {
   email: string
@@ -43,12 +44,12 @@ export function EditEmailForm({
 
   return (
     <form onSubmit={handleSubmit(handle)} className={clsx(className, styles['edit-form'])}>
-      <UiInput 
-        name="email"
-        control={control}
-        placeholder="Новая почта..."
-        className={styles['input']} 
-      />
+          <UiInput
+            control={control}
+            name="email"
+            placeholder="Логин"
+            icon={<Mail size={16} />} 
+          />
       <div className={styles['buttons']}>
       <UiButton type="submit" className={styles['save-button']}>
           Сохранить

@@ -1,0 +1,23 @@
+
+
+  .Toastify__progress-bar {
+    background: #805ad5; /* Фиолетовый цвет */
+  }
+  
+  .Toastify__progress-bar--success {
+    background: #4299e1; /* Зеленый для успеха */
+  }
+
+  .Toastify__toast--success .Toastify__toast-icon svg {
+    fill: #4299e1; /* Зеленый для успеха */
+  }
+  
+  
+  .Toastify__progress-bar--error {
+    background: #f56565; /* Красный для ошибки */
+  }
+  
+  
+  .Toastify__progress-bar--warning {
+    background: #ed8936; /* Оранжевый для предупреждения */
+  }

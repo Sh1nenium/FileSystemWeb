@@ -13,10 +13,35 @@ export function DownloadObject({
 
     const result = await downloadObjectApi(id);
     
+    const contentDisposition = result.headers["content-disposition"];
+
+    let filename = contentDisposition
+      .split("filename*=UTF-8''")[1] 
+      ?.split(";")[0] 
+      ?.trim(); 
+
+    if (!filename) {
+      filename = contentDisposition
+        .split("filename=")[1]
+        ?.split(";")[0] 
+        ?.trim() 
+        .replace(/['"]/g, ''); 
+    }
+    if (!filename) {
+      filename = "download.doc";
+    }
+
+    filename = decodeURIComponent(filename);
+    
     const url = window.URL.createObjectURL(result.data as Blob);
     const link = document.createElement('a');
+
     link.href = url;
-    link.download = _.split(_.split(result.headers["content-disposition"], "attachment; filename=")[1], ";")[0]; 
+    link.download = filename;
+
+    console.log(link.href);
+    console.log(link.download)
+
     link.click();
   }
 

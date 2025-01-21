@@ -18,7 +18,6 @@ export function EditInitialsButton({ className }: { className?: string }) {
       <UiModal
         isOpen={isOpen.value}
         onClose={onClose}
-        title={() => "Изменить инициалы"}
         renderContent={() => <EditInitialsForm onClose={onClose}/>}
       />
     </button>

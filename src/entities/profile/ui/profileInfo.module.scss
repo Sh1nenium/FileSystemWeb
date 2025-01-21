@@ -1,26 +1,39 @@
+:root {
+  --primary-color: #007bff;
+  --text-color: #333;
+  --secondary-text-color: #666;
+  --background-color: #ffffff;
+  --field-background: #f9f9f9;
+  --hover-background: #f0f0f0;
+  --border-radius: 12px;
+  --transition: all 0.3s ease;
+}
+
 .profile-info {
   display: flex;
   flex-direction: column;
-  gap: 0.5rem; // Уменьшаем отступ между полями
-  padding: 1rem;
-  background-color: #ffffff;
-  border-radius: 8px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); // Тень для контейнера
+  gap: 1rem;
+  padding: 1.5rem;
+  background-color: var(--background-color);
+  border-radius: var(--border-radius);
+  box-shadow: var(--box-shadow);
 }
 
 .field {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 1rem;
-  gap: 1rem;
-  background-color: #f9f9f9; // Легкий фон для каждого элемента
-  border-radius: 8px;
-  transition: all 0.3s ease;
+  padding: 1.25rem;
+  gap: 1.5rem;
+  background-color: var(--field-background);
+  border-radius: var(--border-radius);
+  transition: var(--transition);
+  box-shadow: var(--box-shadow);
 
   &:hover {
-    background-color: #f0f0f0; // Изменение фона при наведении
-    cursor: pointer;
+    background-color: var(--hover-background);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
   }
 }
 
@@ -30,22 +43,36 @@
   gap: 0.5rem;
 }
 
-.label-0,
-.label-1,
-.label-2 {
+.label {
   font-size: 0.875rem;
-  font-weight: bold;
-  color: #333;
+  font-weight: 600;
+  color: var(--text-color);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
 }
 
-.value-0,
-.value-1,
-.value-2 {
+.value {
   font-size: 1rem;
-  color: #666;
+  font-weight: 500;
+  color: var(--secondary-text-color);
+  position: relative;
+  padding-left: 1.25rem;
 
   &::before {
-    content: '• '; // Добавляем маркер перед значением
-    color: #007bff; // Цвет маркера
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 8px;
+    height: 8px;
+    background-color: var(--primary-color);
+    border-radius: 50%;
   }
+}
+
+.feature {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
 }

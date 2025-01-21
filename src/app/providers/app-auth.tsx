@@ -3,6 +3,7 @@ import { AuthContext } from "@/shared/contexts/auth-context";
 import { useStateObject } from "@/shared/utils/state-object";
 import React from "react";
 import { ToastContainer } from "react-toastify";
+import './custom-toast.css';
 
 const AuthProvider = ({ children } : { children?: React.ReactNode }) => {
   const { getSession } = useSessionRepository();
@@ -17,9 +18,9 @@ const AuthProvider = ({ children } : { children?: React.ReactNode }) => {
     <AuthContext.Provider value={{ isAuthenticated, setIsAuthenticated }}>
         <ToastContainer
         position="bottom-right"
-        autoClose={3000}
+        autoClose={1500}
         hideProgressBar={false}
-        newestOnTop={false}
+        newestOnTop={true}
         closeOnClick
         rtl={false}
         pauseOnFocusLoss

@@ -1,20 +1,18 @@
-import clsx from "clsx"
-import styles from './profilePicture.module.scss'
-import { Pencil } from "lucide-react"
-import { useStateObject } from "@/shared/utils/state-object"
-import { ProfileIcon, useUserRepository } from "@/entities/profile"
+import clsx from "clsx";
+import styles from './profilePicture.module.scss';
+import {Upload } from "lucide-react";
+import { useUserRepository } from "@/entities/profile";
 import { useRef } from 'react';
+import { ProfileIcon } from "@/entities/profile";
 
 export function ProfilePicture({
   className,
-  picture
-} : {
-  className?: string
-  picture?: string
+  picture,
+}: {
+  className?: string;
+  picture?: string;
 }) {
-  const isHovered = useStateObject(false);
-
-  const { editUserPicture } = useUserRepository()
+  const { editUserPicture } = useUserRepository();
   const fileInputRef = useRef<HTMLInputElement>(null);
 
   const handleClick = () => {
@@ -34,26 +32,25 @@ export function ProfilePicture({
   };
 
   return (
-    <div 
-      onMouseEnter={() => isHovered.setValue(true)}
-      onMouseLeave={() => isHovered.setValue(false)}
-      onMouseUp={handleClick}
-      className={clsx(className, styles['profile-picture'])}>
-      {picture ? 
-        <img className={styles['image']} src={`data:image/png;base64,${picture}`} alt="profile" /> :
-        <ProfileIcon className={styles['image']}/>}
-      {isHovered.value && 
-        <div className={styles['overlay']}>
-          <Pencil className={styles['icon']} size={42}/>
-        </div>}
-
-        <input
+    <div
+      onClick={handleClick}
+      className={clsx(className, styles['profile-picture'])}
+    >
+      {picture ? (
+        <img className={styles['image']} src={`data:image/png;base64,${picture}`} alt="profile" />
+      ) : (
+        <ProfileIcon className={styles['image']} />
+      )}
+      <div className={styles['overlay']}>
+        <Upload className={styles['icon']} size={42} />
+      </div>
+      <input
         type="file"
         ref={fileInputRef}
         style={{ display: 'none' }}
         onChange={handleFileChange}
-        accept="image/*" 
+        accept="image/*"
       />
     </div>
-  )
+  );
 }

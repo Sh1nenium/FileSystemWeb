@@ -6,12 +6,21 @@
   border-radius: 8px;
   background-color: #ffffff;
   border: 1px solid #e0e0e0;
-  cursor: pointer;
   transition: background-color 0.3s ease, box-shadow 0.3s ease;
 
   &:hover {
-    background-color: #f9f9f9;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    border: 2px solid #e0e0e0;
+    transform: translateY(-2px);
+
+    .actions {
+      opacity: 1; 
+      visibility: visible;
+    }
+
+    .dividerButtons {
+      opacity: 1; 
+      visibility: visible;
+    }
   }
 
   .icon {
@@ -25,7 +34,8 @@
     display: flex;
     flex-direction: column;
     gap: 0.5rem;
-    flex: 1; 
+    flex: 1;
+    cursor: pointer;
   }
 
   .header {

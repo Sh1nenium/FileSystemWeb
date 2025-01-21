@@ -1,6 +1,6 @@
 import { ProfileIcon, ProfileInfo, User } from "@/entities/profile";
 import { Popover, PopoverButton, PopoverPanel } from "@headlessui/react";
-import styles from './profilePopover.module.scss'
+import styles from './profilePopover.module.scss';
 import clsx from "clsx";
 import { ProfilePicture } from "@/features/profile/popover/ui/profile-picture";
 import { UiDivider } from "@/shared/ui/ui-divider";
@@ -9,12 +9,13 @@ import { useSessionRepository } from "@/entities/session";
 import { logoutApi } from "@/shared/api/auth/logout";
 import { IS_SUCCESS_STATUS } from "@/shared/api/api-instance";
 import { EditEmailButton, EditInitialsButton } from "../../edit";
-import { ChevronDown, ChevronUp } from 'lucide-react'; // Импортируем иконку стрелки
+import { ChevronDown } from 'lucide-react';
+import { motion, AnimatePresence } from 'framer-motion';
 
 export function ProfilePopover({
   className,
   user
-} : {
+}: {
   className?: string;
   user?: User;
 }) {
@@ -27,20 +28,18 @@ export function ProfilePopover({
       removeSession();
       return;
     }
-  }
+  };
 
-
-  
   return (
     <Popover className={clsx(className, styles['profile-popover'])}>
-      {({ open }) => ( // Получаем состояние `open`
+      {({ open }) => (
         <>
           <PopoverButton className={styles['popover-button']}>
             <div className={styles['profile-container']}>
-            <ChevronDown
+              <ChevronDown
                 className={clsx(
                   styles['arrow'],
-                  open && styles['arrow-rotated'] // Класс для поворота стрелки
+                  open && styles['arrow-rotated']
                 )}
                 size={24}
               />
@@ -55,26 +54,34 @@ export function ProfilePopover({
               )}
             </div>
           </PopoverButton>
-          <PopoverPanel
-            transition
-            anchor="top end"
-            className={styles['popover-panel']}
-          >
-            <div className={styles['profile-header']}>
-              <ProfilePicture picture={user?.picture} />
-              <h1 className={styles['username']}>{getSession()?.username}</h1>
-            </div>
-            <UiDivider orientation="horizontal" />
-            <ProfileInfo
-              user={user}
-              login={getSession()?.username}
-              renderEditEmail={() => <EditEmailButton />}
-              renderEditInitials={() => <EditInitialsButton />}
-            />
-            <UiButton onClick={handleLogout} className={styles['logout-button']}>
-              Выход
-            </UiButton>
-          </PopoverPanel>
+
+          <AnimatePresence>
+            {open && (
+              <PopoverPanel
+                as={motion.div}
+                static
+                initial={{ opacity: 0, y: -10, scale: 0.95 }}
+                animate={{ opacity: 1, y: 0, scale: 1 }}
+                exit={{ opacity: 0, y: -10, scale: 0.95 }}
+                anchor="bottom end"
+                className={styles['popover-panel']}
+              >
+                <div className={styles['profile-header']}>
+                  <ProfilePicture picture={user?.picture} />
+                  <h1 className={styles['username']}>{getSession()?.username}</h1>
+                </div>
+                <UiDivider orientation="horizontal" />
+                <ProfileInfo
+                  user={user}
+                  renderEditEmail={() => <EditEmailButton />}
+                  renderEditInitials={() => <EditInitialsButton />}
+                />
+                <UiButton onClick={handleLogout} className={styles['logout-button']}>
+                  Выход
+                </UiButton>
+              </PopoverPanel>
+            )}
+          </AnimatePresence>
         </>
       )}
     </Popover>
