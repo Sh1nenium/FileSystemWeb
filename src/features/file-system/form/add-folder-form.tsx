@@ -2,6 +2,7 @@ import { useForm } from 'react-hook-form';
 import styles from './form.module.scss'
 import { UiButton, UiInput } from '@/shared/ui';
 import { useFileSystemRepository } from '@/entities/explorer-object';
+import { FolderPen } from 'lucide-react';
 
 type InputForm = {
   name: string;
@@ -39,8 +40,8 @@ export function AddFolderForm({
       <UiInput
         control={control}
         name="name"
-        label='Название'
-        placeholder="Название папки"
+        placeholder="Введите название..."
+        icon={<FolderPen/>}
       />
       <div className={styles['buttons']}>
         <UiButton type="submit" className={styles['save-button']}>

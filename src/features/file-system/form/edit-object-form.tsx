@@ -57,14 +57,12 @@ export function EditObjectForm({
       <UiInput
         control={control}
         name="name"
-        label='Название'
-        placeholder={type === 'File' ? 'Название файла' : 'Название папки'}
+        placeholder={"Введите новое название..."}
       />
       { type === 'File' && <UiInput
         control={control}
         name="description"
-        label='Описание'
-        placeholder="Описание"
+        placeholder="Введите новое описание..."
       />}
       <div className={styles['buttons']}>
         <UiButton type="submit" className={styles['save-button']}>

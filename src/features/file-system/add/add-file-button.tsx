@@ -20,7 +20,6 @@ export function AddFileButton() {
     <UiButton className={styles['add-button']} onClick={handleClick}>
       <FileUp size={32} className={styles['icon']}/>
       <UiModal
-        title= {() => "title"}
         isOpen={isOpen.value}
         onClose={onClose}
         renderContent={() => <AddFileForm parentFolderId={id ?? ''} onClose={onClose}/>}

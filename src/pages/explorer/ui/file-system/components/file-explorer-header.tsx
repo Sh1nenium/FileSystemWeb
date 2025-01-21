@@ -9,6 +9,7 @@ import { AddFolderButton } from "@/features/file-system/add/add-folder-button";
 
 import { FolderClosed } from "lucide-react";
 import styles from "./fileExplorerHeader.module.scss"
+import { FileExplorerCountPanel } from "./file-explorer-count-panel";
 
 export function FileExplorerHeader({
     className,
@@ -37,6 +38,7 @@ export function FileExplorerHeader({
             </span>
         </div>
         
+        <FileExplorerCountPanel className={styles["count-panel"]}/>
         <ProfilePopover user={user} className={styles["profile"]} />
         
       </UiHeader>

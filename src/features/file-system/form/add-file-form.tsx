@@ -1,7 +1,9 @@
 import { useForm, Controller } from 'react-hook-form';
+import { useState } from 'react';
 import styles from './form.module.scss';
 import { UiButton, UiInput } from '@/shared/ui';
 import { useFileSystemRepository } from '@/entities/explorer-object';
+import { TextIcon, Upload } from 'lucide-react';
 
 type InputForm = {
   form: File | null;
@@ -15,12 +17,18 @@ export function AddFileForm({
   parentFolderId?: string;
   onClose?: () => void;
 }) {
-  const { handleSubmit, control } = useForm<InputForm>({
+  const {
+    handleSubmit,
+    control,
+    formState: { errors },
+  } = useForm<InputForm>({
     defaultValues: {
       form: null,
       description: '',
     },
   });
+
+  const [selectedFile, setSelectedFile] = useState<File | null>(null);
 
   const { createFile } = useFileSystemRepository();
 
@@ -38,32 +46,55 @@ export function AddFileForm({
 
     if (success) {
       onClose?.();
-      return;
     }
   };
 
   return (
     <form onSubmit={handleSubmit(handle)} className={styles['form']}>
-      <UiInput
-        control={control}
-        name="description"
-        label="Описание"
-        placeholder="Описание файла"
-      />
-      <Controller
-        control={control}
-        name="form"
-        render={({ field }) => (
-          <input
-            type="file"
-            onChange={(e) => {
-              if (e.target.files && e.target.files[0]) {
-                field.onChange(e.target.files[0]);
-              }
-            }}
-          />
-        )}
-      />
+      <div className={styles['input-group']}>
+        <UiInput
+          control={control}
+          name="description"
+          icon={<TextIcon />}
+          placeholder="Введите описание..."
+        />
+      </div>
+
+      <div className={styles['file-input']}>
+        <Controller
+          control={control}
+          name="form"
+          render={({ field, fieldState }) => (
+            <>
+              <label htmlFor="file-upload" className={styles['file-label']}>
+                <Upload size={20} style={{ marginRight: '0.5rem' }} />
+                Выберите файл
+              </label>
+              <input
+                id="file-upload"
+                type="file"
+                onChange={(e) => {
+                  if (e.target.files && e.target.files[0]) {
+                    const file = e.target.files[0];
+                    field.onChange(file);
+                    setSelectedFile(file);
+                  }
+                }}
+                className={styles['file-input']}
+              />
+              {selectedFile && (
+                <div className={styles['file-info']}>
+                  <span className={styles['file-name']}>{selectedFile.name}</span>
+                </div>
+              )}
+              {fieldState.error && (
+                <span className={styles['error']}>{fieldState.error.message}</span>
+              )}
+            </>
+          )}
+        />
+      </div>
+
       <div className={styles['buttons']}>
         <UiButton type="submit" className={styles['save-button']}>
           Создать
@@ -74,4 +105,4 @@ export function AddFileForm({
       </div>
     </form>
   );
-}
+} 

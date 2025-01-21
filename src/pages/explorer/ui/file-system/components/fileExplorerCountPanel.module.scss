@@ -1,0 +1,25 @@
+.count-panel {
+    justify-self: self-end;
+    display: flex;
+    gap: 1.5rem;
+    padding: 1rem;
+    background-color: #ffffff;
+    border-radius: 8px;
+  }
+  
+  .count-item {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+  
+  .count-label {
+    font-size: 0.875rem;
+    color: #666;
+  }
+  
+  .count-value {
+    font-size: 1rem;
+    font-weight: 600;
+    color: #333;
+  }

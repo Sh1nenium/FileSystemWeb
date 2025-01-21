@@ -8,17 +8,20 @@ import { DeleteObjectApi } from "@/shared/api/file-system/delete-object";
 import { editObjectApi } from "@/shared/api/file-system/edit-object";
 import { applyTagApi } from "@/shared/api/file-system/apply-tag";
 import { removeTagApi } from "@/shared/api/file-system/remove-tag";
+import { CountObjectsApi } from "@/shared/api/file-system/count-objects";
 
 export function useFileSystemRepository(id?: string) {
   const queryClient = useQueryClient();
 
   const query = useQuery(['files', id], () => GetRootContent(id));
+  const count = useQuery(['count'], () => CountObjectsApi());
 
   const createFileMutation = useMutation({
     mutationFn: (data: { form: File, parentFolderId: string, description: string }) => createFileApi(data),
         onSuccess: () => {
             toast.success("Файл был успешно создан!");
             queryClient.invalidateQueries(['files']);
+            queryClient.invalidateQueries(['count']);
         }
   });
 
@@ -27,6 +30,7 @@ export function useFileSystemRepository(id?: string) {
     onSuccess: () => {
         toast.success("Файл был успешно создан!");
         queryClient.invalidateQueries(['files']);
+        queryClient.invalidateQueries(['count']);
     }
   });
 
@@ -35,6 +39,7 @@ export function useFileSystemRepository(id?: string) {
         onSuccess: () => {
             toast.success("Объект был успешно удален!");
             queryClient.invalidateQueries(['files']);
+            queryClient.invalidateQueries(['count']);
         }
   });
 
@@ -44,6 +49,7 @@ export function useFileSystemRepository(id?: string) {
         onSuccess: () => {
             toast.success("Объект был успешно обновлен!");
             queryClient.invalidateQueries(['files']);
+            queryClient.invalidateQueries(['count']);
         }
   });
 
@@ -101,6 +107,7 @@ export function useFileSystemRepository(id?: string) {
 
   return {
     objects: query.data?.data,
+    count: count.data?.data,
     query,
     createFile,
     createFolder,

@@ -18,3 +18,8 @@ export type FolderModel = {
     content: FileSystemObject[]
     objectCount: number
 } & FileSystemObject
+
+export type CountObjects = {
+    countBytesTotal: number,
+    countQuantityTotal: number,
+}
