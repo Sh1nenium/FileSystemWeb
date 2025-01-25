@@ -22,6 +22,7 @@ export function AddFolderButton() {
       <UiModal
         isOpen={isOpen.value}
         onClose={onClose}
+        title={() => "Создать папку"}
         renderContent={() => <AddFolderForm parentFolderId={id ?? ''} onClose={onClose}/>}
       />
     </UiButton>

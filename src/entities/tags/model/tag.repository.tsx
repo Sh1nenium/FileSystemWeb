@@ -52,14 +52,14 @@ export function useTagsRepository() {
     return IS_SUCCESS_STATUS(result.status);
   }
 
-//   const getTagById : Tag | undefined = async (guid: string) => {
-//     const result = await GetTagByIdApi(guid);
-//     if (IS_SUCCESS_STATUS(result.status))
-//         return result.data;
-//     else {
-//         return undefined;
-//     }
-//   }
+  // const getTagById : Tag | undefined = async (guid: string) => {
+  //   const result = await GetTagByIdApi(guid);
+  //   if (IS_SUCCESS_STATUS(result.status))
+  //       return result.data;
+  //   else {
+  //       return undefined;
+  //   }
+  // }
 
 
   return {

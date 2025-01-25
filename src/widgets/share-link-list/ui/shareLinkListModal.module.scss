@@ -1,0 +1,32 @@
+.modal {
+    .title {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      width: 100%;
+      padding: 0 1rem;
+  
+      span {
+        font-size: 1.25rem; // Увеличиваем размер текста
+        font-weight: 600; // Жирный шрифт
+        color: #2d333a; // Темно-серый цвет для акцента
+        position: relative; // Для подчеркивания
+  
+        &::after {
+          content: '';
+          position: absolute;
+          left: 0;
+          bottom: -4px; // Отступ подчеркивания
+          width: 100%;
+          height: 2px;
+          background-color: rgba(#1ab439, 0.3); // Зеленая линия
+          transform: scaleX(0); // Начальное состояние (скрыто)
+          transition: transform 0.2s ease; // Плавное появление
+        }
+      }
+  
+      &:hover span::after {
+        transform: scaleX(1); // Показываем подчеркивание при наведении
+      }
+    }
+  }

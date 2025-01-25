@@ -22,6 +22,7 @@ export function AddFileButton() {
       <UiModal
         isOpen={isOpen.value}
         onClose={onClose}
+        title={() => "Загрузить файл"}
         renderContent={() => <AddFileForm parentFolderId={id ?? ''} onClose={onClose}/>}
       />
     </UiButton>

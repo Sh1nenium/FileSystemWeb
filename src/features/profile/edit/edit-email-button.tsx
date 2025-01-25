@@ -14,7 +14,7 @@ export function EditEmailButton({ className }: { className?: string }) {
 
   return (
     <button className={clsx(className, styles['edit-button'])} onClick={handleClick}>
-      <Pencil className={styles['icon']}/>
+      <Pencil size={24} className={styles['icon']}/>
       <UiModal
         isOpen={isOpen.value}
         onClose={onClose}

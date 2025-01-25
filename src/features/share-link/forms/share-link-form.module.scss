@@ -1,0 +1,174 @@
+.buttons {
+  display: flex;
+  justify-content: center;
+  gap: 1.5rem;
+  margin-top: 1.5rem;
+
+  .save-button,
+  .cancel-button {
+    --primary-color: #007bff; // Основной цвет для save-button
+    --error-color: #ff4444; // Основной цвет для cancel-button
+    --hover-color: darken(#007bff, 10%); // Цвет при наведении
+    --active-color: darken(#007bff, 20%); // Цвет при нажатии
+    --shadow-color: rgba(0, 123, 255, 0.2); // Цвет тени
+
+    padding: 0.875rem 2rem;
+    border: none;
+    border-radius: 12px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+
+    // Эффект градиентной подложки
+    &::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(
+        120deg,
+        transparent,
+        rgba(255, 255, 255, 0.3),
+        transparent
+      );
+      transition: all 0.5s ease;
+    }
+
+    &:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 16px var(--shadow-color);
+
+      &::before {
+        left: 100%;
+      }
+    }
+
+    &:active {
+      transform: translateY(0);
+      box-shadow: 0 2px 4px var(--shadow-color);
+    }
+
+    // Иконка
+    .icon {
+      transition: transform 0.3s ease, color 0.3s ease;
+    }
+
+    &:hover .icon {
+      transform: scale(1.1);
+    }
+  }
+
+  .save-button {
+    background-color: var(--primary-color);
+    color: white;
+
+  }
+
+  .cancel-button {
+    --primary-color: var(--error-color);
+    --hover-color: darken(#ff4444, 10%);
+    --active-color: darken(#ff4444, 20%);
+    --shadow-color: rgba(255, 68, 68, 0.2);
+
+    background-color: var(--primary-color);
+    color: white;
+
+  }
+
+  // Вариант с иконкой
+  &.with-icon {
+    .save-button,
+    .cancel-button {
+      padding: 0.75rem 1.5rem;
+    }
+  }
+
+  // Вариант для маленьких кнопок
+  &.small {
+    .save-button,
+    .cancel-button {
+      padding: 0.5rem 1rem;
+      font-size: 0.875rem;
+    }
+  }
+
+  // Вариант для больших кнопок
+  &.large {
+    .save-button,
+    .cancel-button {
+      padding: 1rem 2.5rem;
+      font-size: 1.125rem;
+    }
+  }
+
+
+}
+
+.input-group {
+  margin-top: 1rem;
+}
+
+.rightsGroup {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  margin: 1.5rem 0;
+
+  .rights-button {
+    --primary-color: #f4f4f5; // Цвет фона
+    --hover-color: #e2e8f0;   // Цвет фона при наведении
+    --active-color: #cbd5e1;  // Цвет фона при нажатии
+    --icon-color: #4a5568;    // Цвет иконки
+    --active-icon-color: #2d3748; // Цвет активной иконки
+
+    background-color: var(--primary-color);
+    color: var(--icon-color);
+    border: none;
+    border-radius: 12px;
+    padding: 0.75rem 1.25rem;
+    font-size: 0.875rem;
+    font-weight: 500;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    transition: all 0.3s ease;
+
+    &:hover {
+      background-color: var(--hover-color);
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    }
+
+    &:active {
+      background-color: var(--active-color);
+      transform: translateY(0);
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    }
+
+    &.active {
+      background-color: var(--active-color);
+      color: var(--active-icon-color);
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+    }
+
+    .icon {
+      font-size: 1rem;
+      transition: transform 0.3s ease, color 0.3s ease;
+    }
+
+    &:hover .icon {
+      transform: scale(1.1);
+      color: var(--active-icon-color);
+    }
+  }
+}

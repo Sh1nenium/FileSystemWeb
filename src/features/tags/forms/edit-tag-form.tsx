@@ -3,6 +3,7 @@ import styles from './form.module.scss'
 import { UiButton, UiInput } from "@/shared/ui";
 import { Tag, useTagsRepository } from "@/entities/tags";
 import { useFileSystemRepository } from "@/entities/explorer-object";
+import { SaveAllIcon, TextIcon, X } from "lucide-react";
 
 type InputForm = {
   name: string;
@@ -41,27 +42,31 @@ export function EditTagForm({
   }
 
   return (
-    <form onSubmit={handleSubmit(handle)} className={styles['edit-form']}>
+    <form onSubmit={handleSubmit(handle)} className={styles['form']}>
+      <div className={styles['input-group']}>
       <UiInput 
         name="name"
+        icon = {<TextIcon />}
         control={control}
-        label="Название"
-        placeholder="Название тега"
+        placeholder="Введите название..."
         className={styles['input']} 
       />
       <UiInput 
         name="description"
+        icon = {<TextIcon />}
         control={control}
-        label="Описание"
-        placeholder="Описание тега"
+        placeholder="Введите описание..."
         className={styles['input']} 
       />
+      </div>
       <div className={styles['buttons']}>
         <UiButton type="submit" className={styles['save-button']}>
+          <SaveAllIcon/>
           Сохранить
         </UiButton>
         <UiButton onClick={onClose} className={styles['cancel-button']}>
           Отменить
+          <X/>
         </UiButton>
       </div>
     </form>

@@ -1,0 +1,89 @@
+.info-modal {
+    background-color: #ffffff;
+    border-radius: 8px;
+    padding: 1.5rem;
+    width: 500px; 
+    max-height: 80vh; 
+    overflow-y: auto;
+  
+    .content {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+  
+    .info-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+  
+      .label {
+        font-weight: 500;
+        color: #666;
+      }
+  
+      .value {
+        color: #333;
+      }
+    }
+  
+    .comments-panel {
+      margin-top: 1rem;
+      border-top: 1px solid #e0e0e0;
+      padding-top: 1rem;
+  
+      h3 {
+        margin: 0 0 1rem 0;
+        font-size: 1.1rem;
+        justify-self: center;
+        color: #333;
+      }
+      
+      .comments-list {
+        max-height: 200px; /* Фиксированная высота для прокрутки */
+        overflow-y: auto; /* Прокрутка, если комментариев много */
+        padding-right: 0.5rem;
+
+        .comment {
+          margin-bottom: 1rem;
+          opacity: 0; /* Начальная прозрачность */
+          animation: fadeInUp 0.5s ease forwards; /* Анимация появления */
+            
+
+          @keyframes fadeInUp {
+            from {
+              opacity: 0;
+              transform: translateY(10px);
+            }
+            to {
+              opacity: 1;
+              transform: translateY(0);
+            }
+          }
+          
+          .comment-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 0.5rem;
+  
+            .comment-author {
+              font-weight: 500;
+              color: #333;
+            }
+  
+            .comment-date {
+              font-size: 0.875rem;
+              color: #666;
+            }
+          }
+  
+          .comment-text {
+            word-wrap: break-word; /* Перенос длинных слов */
+            margin: 0;
+            color: #333;
+          }
+        }
+      }
+    }
+  }

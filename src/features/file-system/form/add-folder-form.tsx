@@ -2,7 +2,7 @@ import { useForm } from 'react-hook-form';
 import styles from './form.module.scss'
 import { UiButton, UiInput } from '@/shared/ui';
 import { useFileSystemRepository } from '@/entities/explorer-object';
-import { FolderPen } from 'lucide-react';
+import { FolderPen, SaveAllIcon, X } from 'lucide-react';
 
 type InputForm = {
   name: string;
@@ -44,11 +44,13 @@ export function AddFolderForm({
         icon={<FolderPen/>}
       />
       <div className={styles['buttons']}>
-        <UiButton type="submit" className={styles['save-button']}>
+      <UiButton type="submit" className={styles['save-button']}>
+          <SaveAllIcon/>
           Создать
         </UiButton>
         <UiButton onClick={onClose} className={styles['cancel-button']}>
           Отменить
+          <X/>
         </UiButton>
       </div>
     </form>

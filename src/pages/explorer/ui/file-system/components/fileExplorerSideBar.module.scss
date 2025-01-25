@@ -1,5 +1,16 @@
 .file-explorer-side-bar {
   margin-top: 15px;
+  padding: 1rem;
+  background: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: box-shadow 0.3s ease;
+  width: 100%;
+  box-sizing: border-box;
+
+  &:hover {
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+  }
 
   .title {
     height: 2rem;
@@ -7,97 +18,116 @@
     align-items: center;
     justify-content: center;
     font-size: 1.25rem;
-    font-weight: bold;
-    color: #333;
-    margin-bottom: 1rem;
-  }
+    font-weight: 600;
+    color: #2c3e50;
+    margin-bottom: 0.25rem;
 
-  .star-icon {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 24px;
-    height: 24px;
-    padding: auto; 
-    color: #ffd700; 
-    flex-shrink: 0;
-    margin-right: 0.5rem; 
-    padding: 0.25rem; 
-  }
+    .star-icon {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 24px;
+      height: 24px;
+      color: #ffd700;
+      flex-shrink: 0;
+      margin-right: 0.5rem;
+      padding: 0.25rem;
+      transition: transform 0.3s ease;
 
-  .filter-buttons {
-    display: flex;
-    gap: 0.5rem;
-    margin-bottom: 1rem;
-    margin-top: 1rem;
-    padding: 0.5rem;
-  
-    button {
-      padding: 0.5rem 1rem;
-      border: 1px solid #e0e0e0;
-      border-radius: 4px;
-      background-color: #f9f9f9;
-      cursor: pointer;
-      transition: background-color 0.3s ease, border-color 0.3s ease;
-  
       &:hover {
-        background-color: #f0f0f0;
-        border-color: #007bff;
-      }
-  
-      &.active {
-        background-color: #007bffbc;
-        color: #ffffff;
-        border-color: #007bff;
+        transform: rotate(15deg);
       }
     }
   }
-  .sotr-buttons {
+
+  .controls {
     display: flex;
     gap: 0.5rem;
-    margin-bottom: 1rem;
     margin-top: 1rem;
-    padding: 0.5rem;
-  
-    button {
+    margin-bottom: 1rem;
+    align-items: center; // Выравниваем кнопки по центру по вертикали
+
+    .popover-button {
       padding: 0.5rem 1rem;
       border: 1px solid #e0e0e0;
-      border-radius: 4px;
+      border-radius: 8px;
       background-color: #f9f9f9;
       cursor: pointer;
-      transition: background-color 0.3s ease, border-color 0.3s ease;
-  
+      transition: all 0.3s ease;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.875rem;
+      font-weight: 500;
+      color: #555;
+      flex: 1 1 auto;
+      min-width: 100px;
+
       &:hover {
         background-color: #f0f0f0;
         border-color: #007bff;
+        transform: translateY(-1px);
+        box-shadow: 0 2px 8px rgba(0, 123, 255, 0.2);
       }
-  
+
       &.active {
-        background-color: #007bffbc;
+        background-color: #007bff;
         color: #ffffff;
         border-color: #007bff;
+        box-shadow: 0 2px 8px rgba(0, 123, 255, 0.3);
       }
     }
   }
-  
-  
+
   .favorites-list {
-    
     margin-top: 1rem;
     display: flex;
-    flex-direction: column; 
+    flex-direction: column;
     gap: 0.5rem;
+    overflow-y: auto;
+    max-height: 300px;
 
     .favorite-item {
       display: flex;
-      align-items: center;
-      gap: 1rem;
+      align-items: center; // Выравниваем элементы по центру по вертикали
+      gap: 0.75rem;
       padding: 0.75rem;
       border: 1px solid #e0e0e0;
       border-radius: 8px;
       background-color: #f9f9f9;
-      transition: border-color 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
-      
+      transition: all 0.3s ease;
+
+      &:hover {
+        border-color: #007bff;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        transform: translateY(-2px);
+        cursor: pointer;
+      }
+
+      .type {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 20px;
+        height: 20px;
+        color: #666;
+        transition: color 0.3s ease;
+
+        &:hover {
+          color: #007bff;
+        }
+      }
+
+      .name {
+        font-size: 0.95rem;
+        font-weight: 500;
+        color: #333;
+        flex: 1;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+
       .remove-button {
         background: none;
         border: none;
@@ -108,40 +138,60 @@
         justify-content: center;
         color: #666;
         transition: color 0.3s ease;
-    
+
         &:hover {
-          color: #ff0000; // Красный цвет при наведении
+          color: #ff0000;
+          transform: scale(1.1);
         }
       }
-
-      &:hover {
-        border-color: #007bff; // Новый цвет границы
-        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2); // Тень
-        cursor: pointer;
-      }
-    
-      .name {
-        font-size: 1rem;
-        font-weight: bold;
-        color: #333;
-        flex: 1;
-      }
-
-      .type {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        width:  px; // Фиксированная ширина для иконки
-        height: 24px; // Фиксированная высота для иконки
-        color: #666; // Цвет иконки
-      }
-
     }
   }
 
   .empty-message {
     font-size: 0.875rem;
-    color: #666;
+    color: #777;
     margin-top: 1rem;
+    text-align: center;
+    font-style: italic;
+  }
+}
+
+.popover-content {
+  background: #ffffff;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  position: absolute;
+  z-index: 1000;
+  min-width: 160px;
+  max-width: 200px;
+  box-sizing: border-box;
+
+  button {
+    padding: 0.5rem 1rem;
+    border: none;
+    border-radius: 6px;
+    background-color: #f9f9f9;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-align: left;
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: #555;
+
+    &:hover {
+      background-color: #f0f0f0;
+      transform: translateY(-1px);
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    &.active {
+      background-color: #007bff;
+      color: #ffffff;
+      box-shadow: 0 2px 8px rgba(0, 123, 255, 0.3);
+    }
   }
 }

@@ -1,0 +1,35 @@
+.header {
+  display: flex;
+  align-items: center; 
+  width: 100%;
+  padding: 0 1.5rem;
+  transition: opacity 0.3s ease; /* Плавное появление */
+
+  .download-button {
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 0.875rem;
+    margin-right: auto; 
+  }
+
+  .title:hover {
+    transform: translateY(-2px); /* Легкое смещение при наведении */
+  }
+
+  .close-button {
+    background: none;
+    border: none;
+    margin-left: auto;
+    font-size: 1.5rem;
+    cursor: pointer;
+    color: #666;
+    padding: 0;
+    transition: color 0.6s ease, transform 0.3s ease; /* Плавные переходы */
+  }
+
+  .close-button:hover {
+    color: #ff0000;
+    transform: scale(1.1); /* Увеличение кнопки при наведении */
+  }
+}

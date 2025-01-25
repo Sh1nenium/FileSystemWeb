@@ -2,11 +2,14 @@ import { Download } from "lucide-react";
 import styles from './downloadObject.module.scss'
 import { downloadObjectApi } from "@/shared/api/file-system/download-object";
 import _ from "lodash";
+import clsx from "clsx";
 
-export function DownloadObject({
-  id
+export function DownloadObjectButton({
+  id,
+  className
 } : {
   id: string
+  className: string | undefined
 }) {
   const handle = async (e: React.MouseEvent) => {
     e.stopPropagation();
@@ -47,7 +50,7 @@ export function DownloadObject({
 
   return (
     <button
-      className={styles['download-button']}
+      className={clsx(styles['download-button'], className) }
       onClick={handle}
     >
       <Download size={24} />

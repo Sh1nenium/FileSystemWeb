@@ -1,0 +1,203 @@
+// Переменные для цветов
+$primary-color: #1a73e8;
+$success-color: #1ab439;
+$error-color: #e81123;
+$disabled-color: #666;
+$border-color: #e3e3e3;
+$hover-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+
+// Переменные для размеров
+$base-padding: 1rem;
+$base-gap: 0.5rem;
+$border-radius: 16px;
+$small-border-radius: 6px;
+$icon-size: 0.9rem;
+$font-size-small: 0.85em;
+$font-size-medium: 0.95em;
+
+// Миксин для анимации
+@mixin transition($properties: all, $duration: 0.2s, $easing: ease) {
+  transition: $properties $duration $easing;
+}
+
+// Миксин для стилей прав доступа
+@mixin rightBadge($color) {
+  background-color: rgba($color, 0.1);
+  color: $color;
+  border: 1px solid rgba($color, 0.2);
+
+  &:hover {
+    background-color: rgba($color, 0.15);
+  }
+}
+
+// Основной контейнер
+.share-link-item {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  padding: $base-padding;
+  background: #fff;
+  border: 1px solid $border-color;
+  border-radius: $border-radius;
+  @include transition;
+  opacity: 1;
+  gap: $base-gap;
+  margin-top: $base-gap;
+  max-width: 100%;
+
+  &[data-processing="true"] {
+    opacity: 0.7;
+    pointer-events: none;
+  }
+
+  &:hover {
+    transform: translateY(-1px);
+    box-shadow: $hover-shadow;
+  }
+
+  // Контентная часть
+  .content {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    gap: $base-gap;
+
+    // Контейнер для ссылки
+    .linkContainer {
+      .linkButton {
+        background: none;
+        border: none;
+        cursor: pointer;
+        display: flex;
+        padding: 0;
+        margin: 0;
+
+        &:disabled {
+          cursor: not-allowed;
+        }
+
+        .linkText {
+          color: $primary-color;
+          max-width: 20rem;
+          font-size: $font-size-medium;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          white-space: nowrap;
+
+          &:hover {
+            text-decoration: underline;
+          }
+        }
+      }
+    }
+
+    // Мета-информация
+    .metaInfo {
+      font-size: $font-size-small;
+      color: $disabled-color;
+    }
+
+    // Контейнер для прав доступа
+    .rightsContainer {
+      display: flex;
+      gap: $base-gap;
+      flex-wrap: wrap;
+
+      .rightBadge {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.25rem;
+        padding: 0.25rem 0.75rem;
+        border-radius: 20px;
+        font-size: $font-size-small;
+        font-weight: 500;
+        @include transition;
+
+        .rightIcon {
+          width: $icon-size;
+          height: $icon-size;
+        }
+      }
+
+      // Стили для конкретных прав
+      .read {
+        @include rightBadge($primary-color);
+      }
+
+      .write {
+        @include rightBadge($success-color);
+      }
+
+      .delete {
+        @include rightBadge($error-color);
+      }
+
+      .none {
+        @include rightBadge($disabled-color);
+      }
+    }
+  }
+
+  // Контейнер для действий (кнопки)
+  .actions {
+    display: flex;
+    gap: $base-gap;
+    flex-shrink: 0;
+
+    button {
+      border: none;
+      border-radius: $small-border-radius;
+      cursor: pointer;
+      @include transition;
+      font-size: $font-size-small;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      &:disabled {
+        opacity: 0.7;
+        cursor: not-allowed;
+      }
+    }
+
+    .deleteButton {
+      color: $error-color;
+
+      &:hover:not(:disabled) {
+        background: rgba($error-color, 0.1);
+      }
+    }
+
+    .editButton {
+      color: orange;
+
+      &:hover:not(:disabled) {
+        background: rgba(orange, 0.1);
+      }
+    }
+  }
+}
+
+// Анимация появления
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+// Адаптивность
+@media (max-width: 600px) {
+  .share-link-item {
+    flex-direction: column;
+    align-items: stretch;
+
+    .actions {
+      margin-top: $base-gap;
+      justify-content: flex-end;
+    }
+
+    .linkContainer {
+      width: 100%;
+    }
+  }
+}

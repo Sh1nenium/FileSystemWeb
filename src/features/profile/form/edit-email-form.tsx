@@ -47,7 +47,7 @@ export function EditEmailForm({
           <UiInput
             control={control}
             name="email"
-            placeholder="Логин"
+            placeholder="Введите почту..."
             icon={<Mail size={16} />} 
           />
       <div className={styles['buttons']}>

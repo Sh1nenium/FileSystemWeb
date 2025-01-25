@@ -9,12 +9,15 @@ import { editObjectApi } from "@/shared/api/file-system/edit-object";
 import { applyTagApi } from "@/shared/api/file-system/apply-tag";
 import { removeTagApi } from "@/shared/api/file-system/remove-tag";
 import { CountObjectsApi } from "@/shared/api/file-system/count-objects";
+import { FileSystemObject } from "./types";
+import { GetObjectContentApi } from "@/shared/api/file-system/get-object-content";
 
 export function useFileSystemRepository(id?: string) {
   const queryClient = useQueryClient();
 
   const query = useQuery(['files', id], () => GetRootContent(id));
   const count = useQuery(['count'], () => CountObjectsApi());
+
 
   const createFileMutation = useMutation({
     mutationFn: (data: { form: File, parentFolderId: string, description: string }) => createFileApi(data),
@@ -53,6 +56,8 @@ export function useFileSystemRepository(id?: string) {
         }
   });
 
+  
+
   const editObject = async (data: { id: string, name: string, description: string, parentFolderId: string, type: "File" | "Folder" }) => {
     const result = await editObjectMutation.mutateAsync(data);
 
@@ -77,6 +82,18 @@ export function useFileSystemRepository(id?: string) {
     return IS_SUCCESS_STATUS(result.status);
   }
 
+  const getObject = async (guid: string) => {
+    try {
+      const result = await GetObjectContentApi(guid);
+  
+      if (IS_SUCCESS_STATUS(result.status)) {
+        return result.data; 
+      }
+      return undefined; 
+    } catch (error) {
+
+    }
+  };
   const applyTagMutation = useMutation({
     mutationFn: (data: { objectId: string, tagId: string }) => applyTagApi(data),
         onSuccess: () => {
@@ -109,6 +126,7 @@ export function useFileSystemRepository(id?: string) {
     objects: query.data?.data,
     count: count.data?.data,
     query,
+    getObject,
     createFile,
     createFolder,
     deleteObject,

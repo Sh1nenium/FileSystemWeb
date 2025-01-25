@@ -25,7 +25,12 @@ export function FileSystemItem({
   onDelete,
   renderEdit,
   renderDownload,
-  renderShareLink
+  renderShareLink,
+  renderInfo,
+
+  onDragStart,
+  onDragOver,
+  onDrop,
 }: {
   item: FileSystemObject;
   onClick?: (item: FileSystemObject) => void;
@@ -36,20 +41,30 @@ export function FileSystemItem({
   renderEdit?: (itemId: string, name: string, description: string, type: "File" | "Folder") => React.ReactNode;
   renderDownload?: (itemId: string) => React.ReactNode;
   renderShareLink?: (itemId: string) => React.ReactNode;
+  renderInfo?: (itemId: string) => React.ReactNode;
+
+  onDragStart?: (e: React.DragEvent<HTMLDivElement>, item: FileSystemObject) => void;
+  onDragOver?: (e: React.DragEvent<HTMLDivElement>) => void;
+  onDrop?: (e: React.DragEvent<HTMLDivElement>, item: FileSystemObject) => void;
 }) {
   const isFolder = item.type === 'Folder';
   const IconComponent = isFolder ? Folder : getFileIcon(item.name);
 
   return (
-    <div className={styles['item']} onClick={() => onClick?.(item)}>
+    <div
+      className={styles['item']}
+      onClick={() => onClick?.(item)}
+      draggable
+      onDragStart={(e) => onDragStart?.(e, item)}
+      onDragOver={(e) => onDragOver?.(e)}
+      onDrop={(e) => onDrop?.(e, item)}
+    >
       <div className={styles['icon']}>
-        <IconComponent size={36} /> 
+        <IconComponent size={36} />
       </div>
       <div className={styles['details']}>
         <div className={styles['header']}>
-          <span className={styles['name']}>
-            {item.name}
-          </span>
+          <span className={styles['name']}>{item.name}</span>
           {!isFolder && (
             <span className={styles['description']}>
               {(item as FileModel).description}
@@ -69,14 +84,16 @@ export function FileSystemItem({
         </div>
         <TagList tags={item.tags} onRemoveTag={onRemoveTag} />
       </div>
-      <hr className={styles.dividerButtons} /> 
+      <hr className={styles.dividerButtons} />
       <div className={styles['actions']}>
+        {renderInfo?.(item.id)}
         {onAddTag?.()}
         {renderShareLink?.(item.id)}
         {renderDownload?.(item.id)}
         {onToggleFavorite?.(item.id, item.isFavorite)}
         {renderEdit?.(item.id, item.name, (item as FileModel).description, item.type)}
         {onDelete?.(item.id)}
+
       </div>
     </div>
   );

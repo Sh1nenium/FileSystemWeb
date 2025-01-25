@@ -22,12 +22,15 @@ export function ProfilePopover({
   const { removeSession, getSession } = useSessionRepository();
 
   const handleLogout = async () => {
-    const result = await logoutApi();
-
-    if (IS_SUCCESS_STATUS(result.status)) {
-      removeSession();
-      return;
+    try {
+      const result = await logoutApi();
     }
+    catch (err) {
+      console.log(err);
+    }
+
+    removeSession();
+    return;
   };
 
   return (

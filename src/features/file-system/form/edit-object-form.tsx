@@ -3,6 +3,7 @@ import { UiButton, UiInput } from "@/shared/ui";
 import { useForm } from "react-hook-form";
 import styles from './form.module.scss'
 import _ from "lodash";
+import { SaveAllIcon, X } from "lucide-react";
 
 export type InputForm = {
   name: string
@@ -65,11 +66,13 @@ export function EditObjectForm({
         placeholder="Введите новое описание..."
       />}
       <div className={styles['buttons']}>
-        <UiButton type="submit" className={styles['save-button']}>
-          Сохранить
+      <UiButton type="submit" className={styles['save-button']}>
+          <SaveAllIcon/>
+          Создать
         </UiButton>
         <UiButton onClick={onClose} className={styles['cancel-button']}>
           Отменить
+          <X/>
         </UiButton>
       </div>
     </form>

@@ -3,7 +3,7 @@ import { useState } from 'react';
 import styles from './form.module.scss';
 import { UiButton, UiInput } from '@/shared/ui';
 import { useFileSystemRepository } from '@/entities/explorer-object';
-import { TextIcon, Upload } from 'lucide-react';
+import { SaveAllIcon, TextIcon, Upload, X } from 'lucide-react';
 
 type InputForm = {
   form: File | null;
@@ -96,11 +96,13 @@ export function AddFileForm({
       </div>
 
       <div className={styles['buttons']}>
-        <UiButton type="submit" className={styles['save-button']}>
+      <UiButton type="submit" className={styles['save-button']}>
+          <SaveAllIcon/>
           Создать
         </UiButton>
         <UiButton onClick={onClose} className={styles['cancel-button']}>
           Отменить
+          <X/>
         </UiButton>
       </div>
     </form>

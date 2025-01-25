@@ -6,6 +6,12 @@ import { EditTagForm } from "@/features/tags/forms/edit-tag-form";
 import { UiModal } from "@/shared/ui/ui-modal";
 import styles from './tagLists.module.scss'
 import _ from "lodash"
+import { useState } from "react";
+
+interface TagListsProps {
+  objectId: string;
+  className?: string;
+}
 
 export function TagLists({
   objectId,
@@ -17,22 +23,24 @@ export function TagLists({
   const { applyTag, objects, removeTag } = useFileSystemRepository();
   const { tags } = useTagsRepository();
 
-  const objectTagIds = _.map(objects?.find((item) => item.id === objectId)?.tags, (tag) => tag.id);
+  const objectTags = objects?.find(item => item.id === objectId)?.tags || [];
+  const objectTagIds = objectTags.map(tag => tag.id);
+
+  const [loadingId, setLoadingId] = useState<string | null>(null);
 
   const handleClick = async (isActive: boolean, tagId: string) => {
-    if (isActive) {
-      await removeTag({
-        objectId,
-        tagId
-      })
-
-      return;
+    try {
+      setLoadingId(tagId);
+      if (isActive) {
+        await removeTag({ objectId, tagId });
+      } else {
+        await applyTag({ objectId, tagId });
+      }
+    } catch (error) {
+      console.error('Ошибка:', error);
+    } finally {
+      setLoadingId(null);
     }
-
-    await applyTag({
-      objectId,
-      tagId,
-    });
   }
 
   return (

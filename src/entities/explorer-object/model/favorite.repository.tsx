@@ -15,6 +15,7 @@ export function useFavoritesRepository() {
      mutationFn: (data: string) => AddToFavoriteApi(data),
         onSuccess: () => {
           queryClient.invalidateQueries(['favorited']);
+          queryClient.invalidateQueries(['files']);
         }
   });
   
@@ -22,6 +23,7 @@ export function useFavoritesRepository() {
      mutationFn: (data: string) => DeleteFromFavoriteApi(data),
         onSuccess: () => {
           queryClient.invalidateQueries(['favorited']);
+          queryClient.invalidateQueries(['files']);
         }
   });
 
