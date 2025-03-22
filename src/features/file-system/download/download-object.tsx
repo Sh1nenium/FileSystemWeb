@@ -15,7 +15,9 @@ export function DownloadObjectButton({
     e.stopPropagation();
 
     const result = await downloadObjectApi(id);
-    
+    console.log(id)
+    console.log(result.headers)
+
     const contentDisposition = result.headers["content-disposition"];
 
     let filename = contentDisposition

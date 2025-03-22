@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import { ROUTES } from '@/shared/constants/routes';
 
 interface BackItemProps {
-    parentFolderId?: string; // ID родительской папки
+    parentFolderId?: string; 
 }
   
 export function BackItem({parentFolderId}: BackItemProps) 

@@ -18,7 +18,7 @@ export type FileModel = {
 
 export type FolderModel = {
     content: FileSystemObject[]
-    objectCount: number
+    objectsCount: number
 } & FileSystemObject
 
 export type CountObjects = {

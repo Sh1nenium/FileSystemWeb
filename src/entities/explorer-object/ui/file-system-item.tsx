@@ -50,6 +50,8 @@ export function FileSystemItem({
   const isFolder = item.type === 'Folder';
   const IconComponent = isFolder ? Folder : getFileIcon(item.name);
 
+  console.log(item)
+
   return (
     <div
       className={styles['item']}
@@ -74,7 +76,7 @@ export function FileSystemItem({
         <div className={styles['info']}>
           {isFolder && (
             <span className={styles['content-count']}>
-              {(item as FolderModel).objectCount ?? 0} элементов
+              {(item as FolderModel).objectsCount ?? 0} элементов
             </span>
           )}
           <span className={styles['size']}>
