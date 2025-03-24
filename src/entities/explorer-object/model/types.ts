@@ -14,7 +14,24 @@ export type FileSystemObject = {
 
 export type FileModel = {
     description: string
+    ownershipType: FileOwnership,
+    fileObjectRights: FileRights,
 } & FileSystemObject
+
+export enum FileRights {
+    None = 0,
+    
+    Read = 1 << 0, 
+    Update = 1 << 1, 
+    Delete = 1 << 2, 
+}
+
+export enum FileOwnership {
+    Unknown = 0,
+
+    Owner = 1,
+    Shared = 2,
+}
 
 export type FolderModel = {
     content: FileSystemObject[]
@@ -43,5 +60,5 @@ export enum ShareRights {
 export type ShareLink = {
     id: string;
     daysToExpire: number;
-    rights: ShareRights; 
+    fileRights: ShareRights; 
 };

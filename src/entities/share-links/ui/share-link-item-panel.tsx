@@ -3,6 +3,7 @@ import { useState } from "react";
 import styles from "./shareLinkItemPanel.module.scss"
 import { ShareRights } from "@/entities/explorer-object/model/types";
 import {  Edit, EditIcon, EyeIcon, LockIcon, Trash2, TrashIcon } from "lucide-react";
+import { toast } from "react-toastify";
 
 
 interface ShareLinkItemPanelProps {
@@ -21,15 +22,16 @@ export function ShareLinkItemPanel({
     const [isEditing, setIsEditing] = useState(false);
     const [isCopied, setIsCopied] = useState(false);
     const isProcessing = loadingId === shareLink.id;
-    const fullLink = `http://localhost:5173/link/resolve?id=${shareLink.id}`;
+    const origin = window.location.origin;
+    const fullLink = `${origin}/link-resolver/${shareLink.id}`;
   
     const handleCopy = () => {
       navigator.clipboard.writeText(fullLink);
       setIsCopied(true);
+
+      toast.success("Ссылка успешно скопирована!"); 
       setTimeout(() => setIsCopied(false), 2000);
   };
-
-  
     return (
       <div 
         className={`${styles['share-link-item']} ${className}`}
@@ -56,25 +58,25 @@ export function ShareLinkItemPanel({
           </div>
           
             <div className={styles.rightsContainer}>
-                {shareLink.rights & ShareRights.Read ? (
+                {shareLink.fileRights & ShareRights.Read ? (
                     <span className={`${styles.rightBadge} ${styles.read}`}>
                     <EyeIcon className={styles.rightIcon} /> Чтение
                     </span>
                 ) : null}
 
-                {shareLink.rights & ShareRights.Write ? (
+                {shareLink.fileRights & ShareRights.Write ? (
                     <span className={`${styles.rightBadge} ${styles.write}`}>
                     <EditIcon className={styles.rightIcon} /> Запись
                     </span>
                 ) : null}
 
-                {shareLink.rights & ShareRights.Delete ? (
+                {shareLink.fileRights & ShareRights.Delete ? (
                     <span className={`${styles.rightBadge} ${styles.delete}`}>
                     <TrashIcon className={styles.rightIcon} /> Удаление
                     </span>
                 ) : null}
 
-                {shareLink.rights === ShareRights.None && (
+                {shareLink.fileRights === ShareRights.None && (
                     <span className={`${styles.rightBadge} ${styles.none}`}>
                     <LockIcon className={styles.rightIcon} /> Нет прав
                     </span>

@@ -19,7 +19,6 @@ export function FileSystemObjectInfoModal({
           isOpen={isOpen}
           title={() => 
           <div className={styles['header']}>  
-            <DownloadObjectButton className= {styles['download-button']} id = { objectId }></DownloadObjectButton> 
             <button className={styles['close-button']} onClick={onClose}>
               <X size={24} strokeWidth={2} />
             </button>

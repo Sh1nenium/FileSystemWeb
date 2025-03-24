@@ -1,15 +1,23 @@
 .header {
     position: relative;
     display: grid;
+    grid-template-columns: auto 1fr auto auto;
     align-items: center;
     justify-content: space-between;
-    padding: 0 1rem // up right down left; 
+    padding: 0 1rem 
   }
 
   .buttons-container {
     display: flex;
     align-items: center;
     gap: 0.5rem
+  }
+
+  .ownership-toggle-container {
+    justify-self: center;
+    margin-right: 40%;
+    display: flex;
+    justify-content: center;
   }
 
   .title-container {

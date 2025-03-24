@@ -23,6 +23,30 @@
     }
   }
 
+  .ownershipBadge {
+    margin-top: 4px;
+  }
+  
+  .ownerBadge {
+    display: inline-block;
+    background-color: #d1fae5; /* светло-зеленый */
+    color: #065f46;
+    padding: 2px 8px;
+    border-radius: 12px;
+    font-size: 12px;
+    font-weight: 600;
+  }
+  
+  .sharedBadge {
+    display: inline-block;
+    background-color: #e0e7ff; /* светло-синий */
+    color: #3730a3;
+    padding: 2px 8px;
+    border-radius: 12px;
+    font-size: 12px;
+    font-weight: 600;
+  }
+  
   .icon {
     display: flex;
     align-items: center;
@@ -96,3 +120,4 @@
     height: 100%;   
   }
 }
+

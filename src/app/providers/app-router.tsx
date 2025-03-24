@@ -4,6 +4,7 @@ import { RootLayout } from "@/widgets/root-layout/ui/root-layout";
 import { ROUTES } from "@/shared/constants/routes";
 import { LoginPage, SigninPage } from "@/pages/auth";
 import { ExplorerPage } from "@/pages/explorer";
+import { LinkResolverPage } from "@/pages/share-link";
 
 const router = createBrowserRouter([
   {
@@ -13,6 +14,10 @@ const router = createBrowserRouter([
   {
     path: ROUTES.REGISTER,
     element: <SigninPage />,
+  },
+  {
+    path: '/link-resolver/:id', 
+    element: <LinkResolverPage />,
   },
   {
     path: ROUTES.ROOT,

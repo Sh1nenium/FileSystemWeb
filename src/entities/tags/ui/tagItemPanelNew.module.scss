@@ -1,0 +1,102 @@
+$disabled-color: #666;
+$error-color: #e81123;
+$border-color: #e3e3e3;
+$hover-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+
+$base-padding: 1rem;
+$base-gap: 0.5rem;
+$border-radius: 16px;
+$small-border-radius: 6px;
+$font-size-small: 0.85em;
+$font-size-medium: 0.95em;
+
+@mixin transition($properties: all, $duration: 0.2s, $easing: ease) {
+  transition: $properties $duration $easing;
+}
+
+.tag-item {
+  min-width: 300px; // Было 50%, теперь фиксированное минимальное значение
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  padding: $base-padding;
+  background: #fff;
+  border: 1px solid $border-color;
+  border-radius: $border-radius;
+  @include transition;
+  gap: $base-gap;
+  margin-top: $base-gap;
+  max-width: 100%;
+
+  &[data-processing="true"] {
+    opacity: 0.7;
+    pointer-events: none;
+  }
+
+  &:hover {
+    transform: translateY(-1px);
+    box-shadow: $hover-shadow;
+  }
+
+  .content {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    gap: $base-gap;
+
+    .info {
+      display: flex;
+      flex-direction: column;
+      gap: $base-gap;
+
+      .name {
+        font-size: $font-size-medium;
+        font-weight: bold;
+        color: darkblue;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+      }
+
+      .description {
+        font-size: $font-size-small;
+        color: $disabled-color;
+      }
+    }
+  }
+
+  .actions {
+    display: flex;
+    gap: $base-gap;
+    flex-shrink: 0;
+
+    button {
+      border: none;
+      border-radius: $small-border-radius;
+      cursor: pointer;
+      @include transition;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      &:disabled {
+        opacity: 0.7;
+        cursor: not-allowed;
+      }
+    }
+
+    .deleteButton {
+      color: $error-color;
+      &:hover:not(:disabled) {
+        background: rgba($error-color, 0.1);
+      }
+    }
+
+    .editButton {
+      color: orange;
+      &:hover:not(:disabled) {
+        background: rgba(orange, 0.1);
+      }
+    }
+  }
+}

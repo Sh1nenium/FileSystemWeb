@@ -1,61 +1,86 @@
 import { Download } from "lucide-react";
-import styles from './downloadObject.module.scss'
+import styles from './downloadObject.module.scss';
 import { downloadObjectApi } from "@/shared/api/file-system/download-object";
-import _ from "lodash";
 import clsx from "clsx";
 
 export function DownloadObjectButton({
   id,
   className
-} : {
-  id: string
-  className: string | undefined
+}: {
+  id: string;
+  className?: string;
 }) {
   const handle = async (e: React.MouseEvent) => {
     e.stopPropagation();
 
-    const result = await downloadObjectApi(id);
-    console.log(id)
-    console.log(result.headers)
+    try {
+      const result = await downloadObjectApi(id);
 
-    const contentDisposition = result.headers["content-disposition"];
+      console.log("Downloading file with id:", id);
+      console.log("Headers:", result.headers);
 
-    let filename = contentDisposition
-      .split("filename*=UTF-8''")[1] 
-      ?.split(";")[0] 
-      ?.trim(); 
+      const contentDisposition = result.headers["content-disposition"];
+      let filename = extractFileName(contentDisposition);
 
-    if (!filename) {
-      filename = contentDisposition
-        .split("filename=")[1]
-        ?.split(";")[0] 
-        ?.trim() 
-        .replace(/['"]/g, ''); 
+      console.log("filename")
+      console.log(filename);
+
+      if (!filename) {
+        console.warn("Filename could not be extracted from Content-Disposition header. Fallback used.");
+        filename = "downloaded-file";
+      }
+
+      const blob = new Blob([result.data]);
+      const url = window.URL.createObjectURL(blob);
+      const link = document.createElement('a');
+
+      link.href = url;
+      link.download = filename;
+
+      document.body.appendChild(link);
+      link.click();
+
+      // Освобождаем ресурсы
+      window.URL.revokeObjectURL(url);
+      document.body.removeChild(link);
+
+    } catch (error) {
+      console.error("Error downloading the file:", error);
     }
-    if (!filename) {
-      filename = "download.doc";
-    }
-
-    filename = decodeURIComponent(filename);
-    
-    const url = window.URL.createObjectURL(result.data as Blob);
-    const link = document.createElement('a');
-
-    link.href = url;
-    link.download = filename;
-
-    console.log(link.href);
-    console.log(link.download)
-
-    link.click();
-  }
+  };
 
   return (
     <button
-      className={clsx(styles['download-button'], className) }
+      className={clsx(styles['download-button'], className)}
       onClick={handle}
     >
       <Download size={24} />
     </button>
-  )
+  );
+}
+
+function extractFileName(contentDisposition?: string): string | null {
+  if (!contentDisposition) {
+    return null;
+  }
+
+  try {
+    // Ищем filename* (UTF-8 encoded)
+    const utf8FileNameMatch = contentDisposition.match(/filename\*\=UTF\-8''([^;]+)/);
+    if (utf8FileNameMatch && utf8FileNameMatch.length > 1) {
+      return decodeURIComponent(utf8FileNameMatch[1].trim());
+    }
+
+    // Ищем обычный filename=
+    const asciiFileNameMatch = contentDisposition.match(/filename="([^"]+)"/) ||
+                               contentDisposition.match(/filename=([^;]+)/);
+    if (asciiFileNameMatch && asciiFileNameMatch.length > 1) {
+      return asciiFileNameMatch[1].trim();
+    }
+
+  } catch (error) {
+    console.error("Error parsing content-disposition header:", error);
+  }
+
+  return null;
 }

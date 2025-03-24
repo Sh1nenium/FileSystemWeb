@@ -1,0 +1,1 @@
+export { LinkResolverPage } from './ui/link-resolver-page'

@@ -1,11 +1,14 @@
 import { UiModal } from "@/shared/ui/ui-modal"
-import { ShareLinkList } from "./share-link-list";
-import styles from "./shareLinkListModal.module.scss"
-import { PlusIcon } from "lucide-react";
+
+import styles from "./tagListModal.module.scss"
+
 import { AddShareLinkButton } from '../../../features/share-link/add-share-link-button';
 import { AddShareLinkForm } from "@/features/share-link/forms/share-link-form";
+import { TagListNew } from "./tag-list";
+import { AddNewTagButton } from "@/features/tags/buttons/add-new-tag-button";
+import { AddTagForm } from "@/features/tags/forms/add-tag-form";
 
-export function ShareLinkModal({
+export function TagListModalNew({
   objectId: objectId,
   isOpen,
   onClose
@@ -21,23 +24,23 @@ export function ShareLinkModal({
           onClose={onClose}
           title={() => (
             <div className={styles['title']}>
-              <span>Ссылки доступа</span>
-              <AddShareLinkButton
+              <span>Метки</span>
+              <AddNewTagButton
                 id={""}
                 renderModal={(id, isOpen, onClose) => (
                                 <UiModal
                                   isOpen={isOpen}
                                   onClose={onClose}
-                                  title={() => "Добавить ссылку"}
-                                  renderContent={() => <AddShareLinkForm parentFolderId={objectId} onClose={onClose} />}
+                                  title={() => "Создать метку"}
+                                  renderContent={() => <AddTagForm onClose={onClose} />}
                                 />
-                              )}
+                            )}
               />
             </div>
           )}
           renderContent={() => (
-            <ShareLinkList 
-              className={styles['share-link-list']} 
+            <TagListNew 
+              className={styles['tag-list']} 
               objectId={objectId} 
             />
           )}

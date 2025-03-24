@@ -8,13 +8,15 @@ import {
   Archive,    
   Code,       
   Table,      
-  Presentation, 
+  Presentation,
+  AppWindow, 
 } from 'lucide-react';
 
 import styles from './fileSystemItem.module.scss';
 import { FileModel, FileSystemObject, FolderModel } from '@/entities/explorer-object';
 import { TagList } from './tag-list';
 import React from 'react';
+import { FileOwnership, FileRights } from '../model/types';
 
 export function FileSystemItem({
   item,
@@ -49,8 +51,6 @@ export function FileSystemItem({
 }) {
   const isFolder = item.type === 'Folder';
   const IconComponent = isFolder ? Folder : getFileIcon(item.name);
-
-  console.log(item)
 
   return (
     <div
@@ -89,13 +89,38 @@ export function FileSystemItem({
       <hr className={styles.dividerButtons} />
       <div className={styles['actions']}>
         {renderInfo?.(item.id)}
-        {onAddTag?.()}
-        {renderShareLink?.(item.id)}
-        {renderDownload?.(item.id)}
-        {onToggleFavorite?.(item.id, item.isFavorite)}
-        {renderEdit?.(item.id, item.name, (item as FileModel).description, item.type)}
-        {onDelete?.(item.id)}
 
+        {item.type === 'Folder' && (
+          <>
+            {onAddTag?.()}
+            {renderDownload?.(item.id)}
+            {onToggleFavorite?.(item.id, item.isFavorite)}
+            {renderEdit?.(item.id, item.name, (item as FolderModel).name, item.type)}
+            {onDelete?.(item.id)}
+          </>
+        )}
+
+        {item.type === 'File' && (
+          <>
+            {hasFileRight((item as FileModel).fileObjectRights, FileRights.Update) &&
+              onAddTag?.()}
+
+            {isOwner((item as FileModel).ownershipType) &&
+              renderShareLink?.(item.id)}
+
+            {hasFileRight((item as FileModel).fileObjectRights, FileRights.Read) &&
+              renderDownload?.(item.id)}
+
+            {hasFileRight((item as FileModel).fileObjectRights, FileRights.Update) &&
+              onToggleFavorite?.(item.id, item.isFavorite)}
+
+            {hasFileRight((item as FileModel).fileObjectRights, FileRights.Update) &&
+              renderEdit?.(item.id, item.name, (item as FileModel).description, item.type)}
+
+            {hasFileRight((item as FileModel).fileObjectRights, FileRights.Delete) &&
+              onDelete?.(item.id)}
+          </>
+        )}
       </div>
     </div>
   );
@@ -112,11 +137,26 @@ const formatDate = (dateString: string) => {
   return date.toLocaleDateString();
 };
 
+export const hasFileRight = (
+  rights: FileRights,
+  rightToCheck: FileRights
+): boolean => {
+  return (rights & rightToCheck) === rightToCheck;
+};
+
+export const isOwner = (ownershipType: FileOwnership): boolean => {
+  return (ownershipType & FileOwnership.Owner) === FileOwnership.Owner;
+};
+
+export const isShared = (ownershipType: FileOwnership): boolean => {
+  return (ownershipType & FileOwnership.Shared) === FileOwnership.Shared;
+};
+
+
 const getFileIcon = (fileName: string) => {
   const extension = fileName.split('.').pop()?.toLowerCase();
 
   switch (extension) {
-    // Изображения
     case 'jpg':
     case 'jpeg':
     case 'png':
@@ -126,7 +166,6 @@ const getFileIcon = (fileName: string) => {
     case 'svg':
       return Image;
 
-    // Аудио
     case 'mp3':
     case 'wav':
     case 'ogg':
@@ -134,7 +173,6 @@ const getFileIcon = (fileName: string) => {
     case 'aac':
       return Music;
 
-    // Видео
     case 'mp4':
     case 'mov':
     case 'avi':
@@ -143,7 +181,6 @@ const getFileIcon = (fileName: string) => {
     case 'wmv':
       return Video;
 
-    // Документы и текстовые файлы
     case 'pdf':
     case 'doc':
     case 'docx':
@@ -152,21 +189,18 @@ const getFileIcon = (fileName: string) => {
     case 'odt':
       return FileText;
 
-    // Презентации
     case 'ppt':
     case 'pptx':
     case 'odp':
     case 'key':
       return Presentation;
 
-    // Таблицы
     case 'xls':
     case 'xlsx':
     case 'csv':
     case 'ods':
       return Table;
 
-    // Архивы
     case 'zip':
     case 'rar':
     case 'tar':
@@ -174,7 +208,6 @@ const getFileIcon = (fileName: string) => {
     case '7z':
       return Archive;
 
-    // Файлы с кодом
     case 'js':
     case 'jsx':
     case 'ts':
@@ -187,7 +220,9 @@ const getFileIcon = (fileName: string) => {
     case 'xml':
       return Code;
 
-    // По умолчанию
+    case 'exe':
+      return AppWindow;
+
     default:
       return File;
   }

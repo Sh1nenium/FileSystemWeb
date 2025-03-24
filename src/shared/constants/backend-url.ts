@@ -14,5 +14,6 @@ export const BACKEND_URL = {
   FILE_SYSTEM: "/file-system",
   FILE_SYSTEM_FAVORITES: "/file-system/favorites",
   FILE_SYSTEM_DOWNLOAD: (id: string) => `/file-system/${id}/download`,
-  TAGS: "/tags"
+  TAGS: "/tags",
+  SHARE_LINKS: "/share-links"
 }

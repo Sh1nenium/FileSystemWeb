@@ -4,6 +4,9 @@ import { FileExplorerHeader } from "./components/file-explorer-header";
 
 import clsx from "clsx";
 import styles from './fileExplorer.module.scss';
+import { useState } from "react";
+import { OwnershipViewMode } from "./lists/mode-toggler";
+
 
 
 export function FileExplorer({
@@ -12,11 +15,17 @@ export function FileExplorer({
   className?: string;
 }) {
 
+  const [ownershipMode, setOwnershipMode] = useState<OwnershipViewMode>(OwnershipViewMode.Owner);
+
   return (
     <div className={clsx(className, styles['file-explorer'])}>
-      <FileExplorerHeader></FileExplorerHeader>
+      <FileExplorerHeader
+        ownershipMode={ownershipMode}
+        setOwnershipMode={setOwnershipMode}
+      />
+
       <UiDivider orientation="horizontal" />
-      <FileSystemList />
+      <FileSystemList ownershipMode={ownershipMode} />
     </div>
   );  
 }

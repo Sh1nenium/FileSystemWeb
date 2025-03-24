@@ -68,7 +68,7 @@ export function EditObjectForm({
       <div className={styles['buttons']}>
       <UiButton type="submit" className={styles['save-button']}>
           <SaveAllIcon/>
-          Создать
+          Принять
         </UiButton>
         <UiButton onClick={onClose} className={styles['cancel-button']}>
           Отменить

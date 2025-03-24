@@ -4,5 +4,7 @@ export const ROUTES = {
   REGISTER: '/register',
   EXPLORER: '/explorer',
   PROFILE: '/profile',
-  FILESYSTEM: '/file-system'
+  FILESYSTEM: '/file-system',
+
+  LINK_RESOLVER: (id: string) => `/link-resolver/${id}`
 } as const;
